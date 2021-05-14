@@ -1,0 +1,79 @@
+.Modal {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  top: -100vh;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  z-index: 5000;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.Modal .Children {
+  position: absolute;
+  margin-top: 50vh;
+  margin-left: 50vw;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 600px;
+  max-width: 85vw;
+  max-height: -webkit-fit-content;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  z-index: 5000;
+}
+
+@media only screen and (max-width: 380px) {
+  .Modal .Children {
+    max-width: 90vw !important;
+  }
+}
+
+@media (min-width: 678px) {
+  .Modal .Children {
+    max-width: 70vw;
+    padding: 50px;
+  }
+}
+
+.Modal .Children > h1 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.Modal .Children > span {
+  position: absolute;
+  font-size: 20px;
+  top: 10px;
+  right: 20px;
+  color: #000;
+}
+
+@media (min-width: 978px) {
+  .Modal .Children > form input,
+  .Modal .Children > form .form-control,
+  .Modal .Children > form select {
+    height: 50px !important;
+  }
+}
+
+.Modal .Children > form .form-row {
+  margin-top: 20px !important;
+}
+
+.Show {
+  bottom: 0;
+  top: 0;
+}

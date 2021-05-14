@@ -1,0 +1,12 @@
+.Profile button {
+  background-color: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
+  outline: none !important;
+}
+
+.Profile button:focus, .Profile button:hover, .Profile button:active,
+.Profile button .active {
+  border: none !important;
+  outline: none !important;
+}
