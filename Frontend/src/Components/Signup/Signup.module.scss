@@ -1,0 +1,26 @@
+.Submit {
+    width: 60% !important;
+    display: block !important;
+    margin: 20px auto !important;
+    border: none !important;
+    background-color: #222 !important;
+    font-size: 1.1rem !important;
+    font-weight: 500 !important;
+}
+
+.CTA {
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0 20px;
+    margin-top: 20px;
+    text-align: center;
+    color: #222;
+
+    span {
+        color: #4982ff;
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: 1px
+    }
+
+}

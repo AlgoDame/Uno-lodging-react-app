@@ -1,0 +1,18 @@
+.carousel {
+  max-height: 85vh !important;
+}
+
+.carousel-inner .carousel-item img {
+  max-width: 1024px !important;
+  min-height: 500px !important;
+  height: auto !important;
+  max-height: 100% !important;
+  display: block !important;
+  margin-top: 0 !important;
+}
+
+@media (min-width: 1024px) {
+  .carousel-inner .carousel-item img {
+    max-width: 100% !important;
+  }
+}
