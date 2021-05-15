@@ -10,6 +10,13 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const morgan_1 = __importDefault(require("morgan"));
 const index_1 = __importDefault(require("./routes/index"));
 const users_1 = __importDefault(require("./routes/users"));
+const signup_1 = __importDefault(require("./routes/signup"));
+const login_1 = __importDefault(require("./routes/login"));
+const getallrooms_1 = __importDefault(require("./routes/getallrooms"));
+const listroom_1 = __importDefault(require("./routes/listroom"));
+const admin_1 = __importDefault(require("./routes/admin"));
+const updatelisting_1 = __importDefault(require("./routes/updatelisting"));
+const deleteroom_1 = __importDefault(require("./routes/deleteroom"));
 const app = express_1.default();
 // view engine setup
 app.set('views', path_1.default.join(__dirname, '../views'));
@@ -21,6 +28,13 @@ app.use(cookie_parser_1.default());
 app.use(express_1.default.static(path_1.default.join(__dirname, 'public')));
 app.use('/', index_1.default);
 app.use('/users', users_1.default);
+app.use('/api/signup', signup_1.default);
+app.use('/api/login', login_1.default);
+app.use('/api/rooms', getallrooms_1.default);
+app.use('/api/host/listing', listroom_1.default);
+app.use('/api/admin/users', admin_1.default);
+app.use('/api/update/id', updatelisting_1.default);
+app.use('/api/delete/id', deleteroom_1.default);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(http_errors_1.default(404));

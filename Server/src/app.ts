@@ -4,8 +4,15 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
-import indexRouter from "./routes/index";
+import indexRouter from './routes/index';
 import usersRouter from './routes/users';
+import signupRouter from './routes/signup';
+import loginRouter from './routes/login';
+import allRoomsRouter from './routes/getallrooms';
+import listRoomRouter from './routes/listroom';
+import admin from './routes/admin';
+import updateListingRouter from './routes/updatelisting';
+import deleteRoomRouter from './routes/deleteroom';
 
 const app = express();
 
@@ -21,6 +28,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/api/signup', signupRouter);
+app.use('/api/login', loginRouter);
+app.use('/api/rooms', allRoomsRouter);
+app.use('/api/host/listing', listRoomRouter);
+app.use('/api/admin/users', admin);
+app.use('/api/update/id', updateListingRouter);
+app.use('/api/delete/id', deleteRoomRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req:Request, res:Response, next:NextFunction) {
