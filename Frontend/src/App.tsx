@@ -1,5 +1,5 @@
 import React from 'react';
-import Container from './Container';
+import Container from './Container/Container';
 import "./global styles/global.css";
 import { withRouter } from "react-router-dom"
 function App() {

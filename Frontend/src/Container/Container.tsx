@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Header from './Components/Header/Header'
-import Footer from './Components/Footer/Footer'
-import Home from './Components/Home/Home';
+import Header from '../Components/Header/Header'
+import Footer from '../Components/Footer/Footer'
+import Home from '../Components/Home/Home';
 // import Modal from "./Components/Modal/Modal"
-import Signup from "./Components/Signup/Signup"
+import Signup from "../Components/Signup/Signup"
 import { Switch, Route, withRouter } from "react-router-dom"
 interface Props {
     history: any;

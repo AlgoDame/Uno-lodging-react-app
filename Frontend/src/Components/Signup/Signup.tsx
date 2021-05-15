@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Modal from "../Modal/Modal";
 import styles from "./Signup.module.css";
 import { Form, Button, Col } from "react-bootstrap";
@@ -12,6 +12,19 @@ interface Props {
 }
 
 const Signup = (props: Props) => {
+    const emailInput = useRef(null)
+    const passwordInput = useRef(null)
+    // const 
+
+    // const handleLoginSubmit = (e) => {
+    //     e.preventDefault();
+    //     const email = emailInput;
+    //     const password = passwordInput;
+    //     if (!isSignup) {
+            
+    //     }
+    //     //Add validation
+    // }
     let signup = null;
     signup = props.isSignup ? (
         <>
@@ -74,12 +87,12 @@ const Signup = (props: Props) => {
             <Form>
                 <Form.Group controlId="formGridEmail">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" />
+                    <Form.Control type="email" ref={emailInput} />
                 </Form.Group>
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridPassword1">
                         <Form.Label>Enter Password</Form.Label>
-                        <Form.Control type="password" />
+                        <Form.Control type="password" ref={passwordInput} />
                     </Form.Group>
                 </Form.Row>
                 <Button className={styles.Submit} type="submit">
