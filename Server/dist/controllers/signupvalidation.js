@@ -6,12 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const joi_1 = __importDefault(require("joi"));
 function validateSignup(requestBody) {
     const schema = {
-        firstname: joi_1.default.string().min(3).required(),
-        lastname: joi_1.default.string().min(3).required(),
+        firstName: joi_1.default.string().min(3).required(),
+        lastName: joi_1.default.string().min(3).required(),
         phone: joi_1.default.string().min(11).required(),
         email: joi_1.default.string().email().required(),
         password: joi_1.default.string().min(7).required(),
-        type: joi_1.default.string().required()
+        type: joi_1.default.string().required(),
     };
     const result = joi_1.default.validate(requestBody, schema);
     if (result.error) {
