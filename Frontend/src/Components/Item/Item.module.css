@@ -1,0 +1,150 @@
+.Item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0 auto;
+  height: 350px;
+  min-height: -webkit-fit-content;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
+  position: relative;
+}
+
+.Item > .imgWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  border-radius: 20px;
+  overflow: hidden;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.Item > .imgWrapper > img {
+  width: 100%;
+  min-height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: 1px solid #fff;
+}
+
+.Item > .imgWrapper .Overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 100%;
+  padding: 25px;
+  font-size: .85rem;
+  font-weight: 700;
+  color: #fff;
+  background-color: rgba(36, 37, 39, 0.6);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  opacity: 0;
+  -webkit-transition: all .7s ease-in-out;
+  transition: all .7s ease-in-out;
+}
+
+.Item > .imgWrapper .Overlay p {
+  text-align: justify;
+}
+
+.Item > .imgWrapper .Overlay button {
+  width: 160px;
+  height: 40px;
+  color: #111;
+  background-color: #fff;
+  font-weight: 700;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+}
+
+.Item > .imgWrapper .Overlay button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.Item > .imgWrapper .Overlay > div {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-top: 10px;
+}
+
+.Item > .imgWrapper .Overlay > div > div img {
+  height: 15px;
+}
+
+.Item > .imgWrapper .Overlay > div > div span {
+  font-size: 1rem;
+  font-weight: 700;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+  text-transform: uppercase;
+}
+
+.Item > .imgWrapper .Overlay > div > div img:hover,
+.Item > .imgWrapper .Overlay > div > div span:hover {
+  color: #282E52;
+}
+
+.Item > .imgWrapper:hover .Overlay {
+  top: 0;
+  opacity: 1;
+}
+
+.Item > .Ratings {
+  margin: 20px 0 0;
+}
+
+.Item > .Ratings img {
+  margin-right: 6px;
+  height: 13px;
+}
+
+.Item h3 {
+  font-size: 1rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 20px 0;
+}
+
+.Item .Price {
+  -ms-grid-column-align: space-between !important;
+      justify-self: space-between !important;
+  position: absolute;
+  bottom: 10px;
+  font-weight: 800;
+  font-size: 1rem;
+}

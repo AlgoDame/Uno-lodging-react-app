@@ -1,0 +1,138 @@
+.About {
+    display: flex;
+    flex-flow: column;
+    padding: 20px;
+
+    h1 {
+        text-align: center;
+        padding: 20px 0;
+        font-size: 1.5rem;
+        font-weight: 800;
+        text-transform: uppercase;
+
+        @media (min-width: 978px) {
+            font-size: 1.8rem;
+        }
+
+        @media (min-width: 1280px) {
+            font-size: 2rem;
+        }
+    }
+
+    .Main {
+        // padding: 50px;
+        display: flex;
+        flex-direction: column;
+
+        background: #fefeff;
+
+        .item {
+            display: grid;
+            // grid-template-columns: 1fr 1fr;
+            grid-gap: 50px;
+            align-items: center;
+            margin-bottom: 50px;
+
+            .image {
+                width: 100%;
+                height: 200px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 8px;
+
+                    &:hover {
+                        opacity: .7;
+                        
+                    }
+                }
+
+            }
+
+            .desc {
+                // padding-right: 50px;
+
+                h2 {
+                    font-size: .9rem;
+                    font-weight: 900;
+                    letter-spacing: .5px;
+                    text-transform: uppercase;
+                }
+
+                p {
+                    font-size: 1rem;
+                }
+
+                @media (min-width: 768px) {
+                    h2 {
+                        font-size: 1rem;
+                    }
+
+                    p {
+
+                        font-size: 1.1rem;
+                    }
+                }
+
+                @media (min-width: 1280px) {
+                    h2 {
+                        font-size: 1.1rem;
+                    }
+
+                    p {
+
+                        font-size: 1.3rem;
+                    }
+                }
+            }
+
+            &:nth-child(2) {
+                .desc {
+
+                    order: 4;
+
+                    @media (min-width:978px) {
+                        order: 0
+                    }
+                }
+            }
+
+            @media (min-width: 500px) {
+                .image {
+                    height: 300px
+                }
+            }
+
+            @media (min-width:978px) {
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 80px;
+
+                .image {
+                    height: 300px;
+                }
+            }
+
+            @media (min-width: 1280px) {
+                grid-gap: 100px;
+
+                .image {
+                    height: 400px;
+                }
+            }
+        }
+
+        @media (min-width: 678px) {
+            // padding: 50px;
+        }
+    }
+
+    @media(min-width: 500px) {
+        padding: 50px
+    }
+
+    @media(min-width: 978px) {
+        padding: 100px
+    }
+}

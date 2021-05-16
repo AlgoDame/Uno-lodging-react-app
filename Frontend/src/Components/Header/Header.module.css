@@ -9,18 +9,21 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   padding: 10px;
   position: fixed;
   top: 0;
   z-index: 2000;
+  -webkit-transition: all .6s ease;
+  transition: all .6s ease;
 }
 
 @media only screen and (min-width: 768px) {
   .Header {
     padding: 30px 50px;
+    height: 100px;
   }
 }
 
@@ -83,24 +86,23 @@
 
 .Header .Links > button {
   color: #fff;
-  padding: 0 20px;
-  height: 40px;
-  border-radius: 20px;
-  font-weight: 500;
+  padding: 15px;
+  height: 50px;
+  font-weight: 600;
   outline: none;
   border: none;
   background-color: transparent;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .Header .Links > button:hover {
   background-color: #111;
-}
-
-.Top {
-  background: rgba(0, 0, 0, 0.12);
-  -webkit-backdrop-filter: blur(3px);
-          backdrop-filter: blur(3px);
 }
 
 .Scroll {
