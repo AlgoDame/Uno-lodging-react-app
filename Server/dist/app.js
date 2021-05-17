@@ -19,6 +19,8 @@ const listroom_1 = __importDefault(require("./routes/listroom"));
 const admin_1 = __importDefault(require("./routes/admin"));
 const updatelisting_1 = __importDefault(require("./routes/updatelisting"));
 const deleteroom_1 = __importDefault(require("./routes/deleteroom"));
+const allHost_1 = __importDefault(require("./routes/allHost"));
+const allGuests_1 = __importDefault(require("./routes/allGuests"));
 const app = express_1.default();
 // view engine setup
 app.set('views', path_1.default.join(__dirname, '../views'));
@@ -39,6 +41,8 @@ app.use('/api/host/listing', listroom_1.default);
 app.use('/api/admin/users', admin_1.default);
 app.use('/api/update/id', updatelisting_1.default);
 app.use('/api/delete/id', deleteroom_1.default);
+app.use('/api/getAllHosts', allHost_1.default);
+app.use('/api/allGuests', allGuests_1.default);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(http_errors_1.default(404));

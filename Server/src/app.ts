@@ -15,6 +15,8 @@ import listRoomRouter from './routes/listroom';
 import admin from './routes/admin';
 import updateListingRouter from './routes/updatelisting';
 import deleteRoomRouter from './routes/deleteroom';
+import allHostRouter from './routes/allHost';
+import allGuests from './routes/allGuests';
 
 const app = express();
 
@@ -39,6 +41,8 @@ app.use('/api/host/listing', listRoomRouter);
 app.use('/api/admin/users', admin);
 app.use('/api/update/id', updateListingRouter);
 app.use('/api/delete/id', deleteRoomRouter);
+app.use('/api/getAllHosts', allHostRouter);
+app.use('/api/allGuests', allGuests);
 
 
 // catch 404 and forward to error handler

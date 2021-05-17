@@ -11,7 +11,7 @@ function validateRoomListing(requestBody) {
         location: joi_1.default.string().required(),
         price: joi_1.default.string().required(),
         //@NOTE image is supposed to be array of urls
-        image: joi_1.default.string().required(),
+        //image: Joi.string().required(),
         hostname: joi_1.default.string().required(),
         hostid: joi_1.default.string().required()
     };
