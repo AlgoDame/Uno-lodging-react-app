@@ -7,9 +7,10 @@ function validateRoomListing(requestBody:Record<string, any>) {
         location: Joi.string().required(),
         price: Joi.string().required(),
         //@NOTE image is supposed to be array of urls
-        image: Joi.string().required(),
+        //image: Joi.string().required(),
         hostname: Joi.string().required(),
         hostid: Joi.string().required()
+        
     }
     const result = Joi.validate(requestBody, schema)
     if (result.error) {
