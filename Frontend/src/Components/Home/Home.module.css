@@ -57,8 +57,8 @@
     text-align: start;
     padding: 80px;
     top: 50%;
-    -webkit-transform: translate(0, -60%);
-            transform: translate(0, -60%);
+    -webkit-transform: translate(0, -50%);
+            transform: translate(0, -50%);
     left: 0;
   }
 }

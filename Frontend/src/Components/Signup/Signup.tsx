@@ -1,4 +1,4 @@
-import React, { useState, useRef, MouseEvent } from "react";
+import React, { useState, useRef, MouseEvent, ChangeEvent, useEffect } from "react";
 import Modal from "../Modal/Modal";
 import styles from "./Signup.module.css";
 import { Form, Button, Col } from "react-bootstrap";
@@ -30,13 +30,136 @@ const getBase64 = (file: File, cb) => {
     };
 }
 const Signup = (props: Props) => {
+
+    const initialData = {
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        phone: "",
+        type: props.type
+    }
     const [files, setFiles] = useState<(string | Buffer)[]>([]);
-    const [email, setEmail] = useState("")
+    const [data, setData] = useState(initialData)
+    const [passwordConfirmation, setPasswordConfirmation] = useState("")
+    const [loginType, setLoginType] = useState("")
     const emailInput = useRef(null)
     const passwordInput = useRef(null)
     let fileUploads = useRef() as MutableRefObject<HTMLInputElement>
     let form_data = useRef() as MutableRefObject<HTMLFormElement>
     // const 
+    // utility function to validate input email
+
+    useEffect(() => {
+        setData(initialData);
+        console.log("useeffect just ran!!")
+    }, [props.show])
+    const validateEmail = (email) => {
+        const testRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+        return testRegex.test(email)
+    }
+    const validatePassword = (password) => {
+        let numReg = /[0-9]/g
+        return password.trim().length > 7 && numReg.test(password)
+    }
+
+    const status = (validationType) => {
+        switch (validationType) {
+            case "email":
+                const testRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+                if (!testRegex.test(data.email)) {
+                    return "Invalid email address"
+                }
+                else {
+                    return ""
+                }
+            case "password":
+                let numReg = /[0-9]/g
+                if (!(data.password.trim().length > 7 && numReg.test(data.password))) {
+                    return "passwords must be greater than 7 and should contain numbers and alphabets"
+                }
+                else if (passwordConfirmation !== data.password) {
+                    return "passwords do not match"
+                }
+                else return "";
+            default:
+                return true;
+
+        }
+    }
+    const handleEmailInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setData({ ...data, email: e.target.value });
+    }
+    const handlPasswordInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setData({ ...data, password: e.target.value });
+    }
+
+    const handlePasswordConfirmationChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setPasswordConfirmation(e.target.value)
+    }
+
+    const handleFirstNameInput = (e: ChangeEvent<HTMLInputElement>) => {
+        setData({ ...data, firstName: e.target.value })
+    }
+    const handleLastNameInput = (e: ChangeEvent<HTMLInputElement>) => {
+        setData({ ...data, lastName: e.target.value })
+    }
+    const handlePhoneInput = (e: ChangeEvent<HTMLInputElement>) => {
+        setData({ ...data, phone: e.target.value })
+    }
+
+    const handleSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+        // console.log(e.target.value, loginType)
+        setLoginType(e.target.value);
+    }
+
+    const handleLoginSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+
+        if (validateEmail(data.email) && validatePassword(data.password)) {
+            const body = { email: data.email, password: data.password, type: loginType };
+            await validateLogin(body)
+            console.log(loginType)
+            console.log(body);
+        }
+        else console.log("invalid Email or Password")
+    }
+    const handleSignupSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        const emailStatus = status("email");
+        const passwordStatus = status("password")
+        if (emailStatus !== "" || passwordStatus !== "") {
+            console.log(emailStatus, passwordStatus)
+        }
+        const body = { ...data, type: props.type }
+        await validateSignup(body)
+        console.log(body)
+        // if (validateEmail(data.email) && validatePassword(data.password)) {
+        //     const body = { email: data.email, password: data.password, type: props.type };
+        //     console.log(data);
+        // }
+        // else console.log("invalid Email or Password")
+    }
+    const validateLogin = async (body) => {
+        try {
+            const { data } = await axios.post("http://localhost:5000/api/login", body, { headers: { 'content-type': "application/json" } })
+            console.log(data)
+        }
+        catch (e) {
+            console.log(e.message)
+        }
+    }
+    const validateSignup = async (body) => {
+        try {
+            const { data } = await axios.post("http://localhost:5000/api/signup", body, { headers: { 'content-type': "application/json" } })
+            console.log(data)
+        }
+        catch (e) {
+
+            console.log(e)
+        }
+    }
+
     const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         if (fileUploads.current) {
@@ -87,7 +210,7 @@ const Signup = (props: Props) => {
         }
 
     }
-    // const handleLoginSubmit = (e) => {
+    // const handleLoginSubmitSubmit = (e) => {
     //     e.preventDefault();
     //     const email = emailInput;
     //     const password = passwordInput;
@@ -103,42 +226,34 @@ const Signup = (props: Props) => {
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridEmail">
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control type="text" />
+                        <Form.Control type="text" value={data.firstName} onChange={handleFirstNameInput} />
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridPassword">
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="text" />
+                        <Form.Control type="text" value={data.lastName} onChange={handleLastNameInput} />
                     </Form.Group>
                 </Form.Row>
 
                 <Form.Group controlId="formGridEmail">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" value={email} />
+                    <Form.Control type="email" value={data.email} onChange={handleEmailInputChange} />
                 </Form.Group>
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridPassword1">
                         <Form.Label>Enter Password</Form.Label>
-                        <Form.Control type="password" />
+                        <Form.Control type="password" value={data.password} onChange={handlPasswordInputChange} />
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridPassword1">
                         <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control type="password" />
+                        <Form.Control type="password" value={passwordConfirmation} onChange={handlePasswordConfirmationChange} />
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridZip">
                         <Form.Label>Telephone</Form.Label>
-                        <Form.Control type="tel" />
-                    </Form.Group>
-                    <Form.Group as={Col} controlId="formGridState">
-                        <Form.Label>Sign up as</Form.Label>
-                        <Form.Control as="select" defaultValue="Sign up as">
-                            <option disabled>Choose...</option>
-                            <option>Guest</option>
-                            <option>Host</option>
-                        </Form.Control>
+                        <Form.Control type="tel" value={data.phone} onChange={handlePhoneInput} />
                     </Form.Group>
                 </Form.Row>
                 {/* <Form.Group>
@@ -163,7 +278,7 @@ const Signup = (props: Props) => {
                 {/* <Form.Group>
                     <Form.File id="exampleFormControlFile1" label="Example file input" name="image" ref={fileUploads} multiple />
                 </Form.Group> */}
-                <Button className={styles.Submit} value={props.type} type="submit" onClick={handleSubmit}>
+                <Button className={styles.Submit} value={props.type} type="submit" onClick={handleSignupSubmit}>
                     Sign Up
                 </Button>
             </Form>
@@ -179,15 +294,25 @@ const Signup = (props: Props) => {
             <Form>
                 <Form.Group controlId="formGridEmail">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" ref={emailInput} />
+                    <Form.Control type="email" ref={emailInput} value={data.email} onChange={handleEmailInputChange} />
                 </Form.Group>
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridPassword1">
                         <Form.Label>Enter Password</Form.Label>
-                        <Form.Control type="password" ref={passwordInput} />
+                        <Form.Control type="password" ref={passwordInput} onChange={handlPasswordInputChange} />
                     </Form.Group>
                 </Form.Row>
-                <Button className={styles.Submit} type="submit">
+                <Form.Row>
+                    <Form.Group as={Col} controlId="formGridState">
+                        <Form.Label>Login as</Form.Label>
+                        <Form.Control as="select" value={loginType} onChange={handleSelect}>
+                            <option disabled>Choose...</option>
+                            <option value="guest">Guest</option>
+                            <option value="host">Host</option>
+                        </Form.Control>
+                    </Form.Group>
+                </Form.Row>
+                <Button className={styles.Submit} onClick={handleLoginSubmit} type="submit">
                     Login
                 </Button>
             </Form>
