@@ -20,7 +20,8 @@ const validateUser = (email: string, password: string, data: Data[]) => {
 router.post("/", function (req: Request, res: Response, next: NextFunction) {
   const error = validateLogin(req.body);
   if (error) {
-    return res.status(400).json({ status: "Error", message: error });
+    res.json({ status: "Error", message: error });
+    return res.status(400).end()
   } else {
     const { email, password, type } = req.body;
     switch (type) {
@@ -35,7 +36,8 @@ router.post("/", function (req: Request, res: Response, next: NextFunction) {
                 .status(200)
                 .json({ status: "Successful", data: userInfo.data });
             } else {
-              res.status(400).json({ status: "Invalid credentials" });
+              res.json({ status: "Invalid credentials" });
+              return res.status(404).end()
             }
             console.log(hosts);
           })
@@ -52,9 +54,11 @@ router.post("/", function (req: Request, res: Response, next: NextFunction) {
                 .status(200)
                 .json({ status: "Successful", data: userInfo.data });
             } else {
-              res.status(400).json({ status: "Invalid credentials" });
+              res.json({ status: "Invalid credentials" });
+              return res.status(404).end()
+
             }
-            console.log(guests);
+            // console.log(guests);
           })
           .catch((err) => console.log(err));
         break;
@@ -69,9 +73,10 @@ router.post("/", function (req: Request, res: Response, next: NextFunction) {
                 .status(200)
                 .json({ status: "Successful", data: userInfo.data });
             } else {
-              res.status(400).json({ status: "Invalid credentials" });
+              res.json({ status: "Invalid credentials" });
+              return res.status(404).end()
             }
-            console.log(admin);
+            // console.log(admin);
           })
           .catch((err) => console.log(err));
         break;

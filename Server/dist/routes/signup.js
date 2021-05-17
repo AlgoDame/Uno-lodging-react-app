@@ -11,7 +11,8 @@ router.post("/", function (req, res, next) {
     const error = signupvalidation_1.default(req.body);
     const { type, email } = req.body;
     if (error) {
-        return res.status(400).json({ status: "Error", message: error });
+        res.json({ status: "Error", message: error });
+        return res.status(400).end();
     }
     const addUser = (category) => {
         firebaseConfig_1.db.collection(category)
@@ -21,7 +22,10 @@ router.post("/", function (req, res, next) {
                 .status(201)
                 .json({ status: "Successful", data: req.body, resp });
         })
-            .catch((err) => res.status(404).json({ err }));
+            .catch((err) => {
+            res.json({ err });
+            return res.status(400).end();
+        });
     };
     switch (type) {
         case "host":
@@ -33,7 +37,8 @@ router.post("/", function (req, res, next) {
                     addUser("hosts");
                 }
                 else {
-                    return res.status(404).json({ message: "Email already exists!!!" });
+                    res.json({ message: "Email already exists!!!" });
+                    return res.status(404).end();
                 }
             });
             break;
@@ -46,7 +51,8 @@ router.post("/", function (req, res, next) {
                     addUser("guests");
                 }
                 else {
-                    return res.status(404).json({ message: "Email already exists!!!" });
+                    res.json({ message: "Email already exists!!!" });
+                    return res.status(404).end();
                 }
             });
     }

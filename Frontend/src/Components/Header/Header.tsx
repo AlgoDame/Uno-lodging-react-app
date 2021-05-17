@@ -5,7 +5,8 @@ import styles from './Header.module.css';
 interface Props {
     toggle: () => void
     signIn: () => void
-    signUp: () => void
+    hostSignUp: () => void
+    guestSignUp: () => void
 }
 
 const Header = (props: Props) => {
@@ -30,12 +31,12 @@ const Header = (props: Props) => {
             </div>
             <SearchBar placeholder="Find a room" />
             <div className={styles.Links}>
-                <button>Become a host</button>
-                <button onClick={props.signUp}>Sign up</button>
+                <button onClick={props.hostSignUp}>Become a host</button>
+                <button onClick={props.guestSignUp}>Sign up</button>
                 <button onClick={props.signIn}>{signedIn ? "I'm in" : "Login"}</button>
             </div>
             <div className={styles.Dropdown}>
-                <Profile signIn={props.signIn} signUp={props.signUp} />
+                <Profile signIn={props.signIn} signUp={props.guestSignUp} />
             </div>
 
         </nav>

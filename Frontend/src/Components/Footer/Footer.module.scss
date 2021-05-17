@@ -1,4 +1,203 @@
-.Main {
-    height: 100vh;
-    width: 100vw;
+.Wrapper {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    // padding: 30px;
+    padding-bottom: 0;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fefeff;
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .Line {
+        // width: calc(100% - 100px);
+        width: 100vw;
+        height: 1px;
+        background-color: #d8d8d8;
+        // margin: -20px auto 30px
+    }
+
+    .Footer {
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        // display: grid;
+        // grid-template-columns: 2fr 1.5fr 1fr;
+        // padding: 50px;
+        padding: 20px;
+        width: 100%;
+        text-align: left;
+        line-height: 2;
+
+        // margin: 0 auto;
+        @media (min-width: 678px) {
+            flex-flow: row;
+            padding: 50px;
+        }
+
+        >* {
+            // flex: 1;
+            display: flex;
+            flex-flow: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            color: #616161;
+            width: 300px;
+
+            >* {
+                font-weight: 300;
+            }
+
+            h2 {
+                font-size: .9rem;
+                font-weight: 700;
+                color: #333;
+                letter-spacing: 1.2px;
+                text-transform: uppercase;
+
+                @media (min-width: 1024px) {
+                    font-size: 1.1rem
+                }
+            }
+
+        }
+
+        .Section {
+            // width: 400px;
+            letter-spacing: 1px;
+            flex: 1;
+
+            padding: 10px;
+
+            @media (min-width: 978px) {
+                padding: 20px
+            }
+
+            div {
+
+                h3 {
+                    font-size: .8rem;
+                    font-weight: 400;
+                    margin: 10px 0;
+
+                    @media only screen and (min-width: 1024px) {
+                        font-size: 1.2rem;
+                    }
+
+                }
+            }
+        }
+
+        .Socials {
+            padding: 10px;
+            flex: 1;
+
+            @media (min-width: 978px) {
+                padding: 20px
+            }
+
+            >form {
+                height: 44px;
+                margin-top: 20px;
+                min-width: 100%;
+
+                >input {
+                    border: none;
+                    outline: none;
+                    background: #f4f5f7;
+                    min-height: 100%;
+                    width: calc(100% - 44px);
+                    padding: 0 10px;
+
+                    &::placeholder {
+                        color: #616168;
+                        font-size: .9rem;
+                        font-weight: 300;
+                    }
+
+                    &:active,
+                    &:focus {
+                        border: 2px solid rgba(0, 0, 244, .4);
+                        border-radius: 5px 0 0 5px;
+                    }
+
+                }
+
+                >button {
+                    height: 100%;
+                    width: 44px;
+                    outline: none;
+                    border: none;
+                    background-color: blue;
+
+
+                    img {
+                        margin-left: 50%;
+                        transform: translateX(-50%)
+                    }
+                }
+
+                @media (min-width: 1280px) {
+                    height: 50px;
+
+                    >input {
+                        padding: 0 20px
+                    }
+                }
+            }
+
+        }
+
+    }
+
+
+    footer {
+        font-weight: 700;
+        width: 100%;
+        text-align: center;
+        height: 80px;
+        padding: 0 50px;
+        // margin-top: auto;
+        border-top: 2px solid #ddd;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        .text {
+            font-size: .8rem;
+            padding: 20px
+        }
+
+        .icons {
+            margin: auto;
+
+            img {
+                margin-right: 15px;
+                height: 20px;
+            }
+        }
+
+        @media (min-width: 978px) {
+            flex-flow: row;
+
+            .text {
+                font-size: 1rem
+            }
+
+            .icons {
+                margin: auto 0 auto auto;
+
+                img {
+                    height: 30px
+                }
+            }
+        }
+    }
 }

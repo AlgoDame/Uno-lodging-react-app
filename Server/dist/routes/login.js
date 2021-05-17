@@ -17,7 +17,8 @@ const validateUser = (email, password, data) => {
 router.post("/", function (req, res, next) {
     const error = loginvalidation_1.default(req.body);
     if (error) {
-        return res.status(400).json({ status: "Error", message: error });
+        res.json({ status: "Error", message: error });
+        return res.status(400).end();
     }
     else {
         const { email, password, type } = req.body;
@@ -34,7 +35,8 @@ router.post("/", function (req, res, next) {
                             .json({ status: "Successful", data: userInfo.data });
                     }
                     else {
-                        res.status(400).json({ status: "Invalid credentials" });
+                        res.json({ status: "Invalid credentials" });
+                        return res.status(404).end();
                     }
                     console.log(hosts);
                 })
@@ -52,9 +54,10 @@ router.post("/", function (req, res, next) {
                             .json({ status: "Successful", data: userInfo.data });
                     }
                     else {
-                        res.status(400).json({ status: "Invalid credentials" });
+                        res.json({ status: "Invalid credentials" });
+                        return res.status(404).end();
                     }
-                    console.log(guests);
+                    // console.log(guests);
                 })
                     .catch((err) => console.log(err));
                 break;
@@ -70,9 +73,10 @@ router.post("/", function (req, res, next) {
                             .json({ status: "Successful", data: userInfo.data });
                     }
                     else {
-                        res.status(400).json({ status: "Invalid credentials" });
+                        res.json({ status: "Invalid credentials" });
+                        return res.status(404).end();
                     }
-                    console.log(admin);
+                    // console.log(admin);
                 })
                     .catch((err) => console.log(err));
                 break;

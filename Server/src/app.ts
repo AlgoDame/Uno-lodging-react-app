@@ -1,9 +1,11 @@
-import createError, { HttpError} from 'http-errors';
-import express, { Request, Response, NextFunction} from 'express';
+import createError, { HttpError } from 'http-errors';
+import express, { Request, Response, NextFunction } from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-
+import cors from "cors";
+import formidable from "formidable";
+import bodyParser from "body-parser";
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
 import signupRouter from './routes/signup';
@@ -24,6 +26,8 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -42,12 +46,12 @@ app.use('/api/allGuests', allGuests);
 
 
 // catch 404 and forward to error handler
-app.use(function(req:Request, res:Response, next:NextFunction) {
+app.use(function (req: Request, res: Response, next: NextFunction) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err:HttpError, req:Request, res:Response, next:NextFunction) {
+app.use(function (err: HttpError, req: Request, res: Response, next: NextFunction) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

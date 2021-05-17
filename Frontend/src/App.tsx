@@ -1,11 +1,12 @@
 import React from 'react';
-import Container from './Container';
+import Container from './Container/Container';
 import "./global styles/global.css";
-import { withRouter } from "react-router-dom"
+import { withRouter } from "react-router-dom";
+import { AuthContextProvider } from "./store/AuthContext"
 function App() {
   return (
     <div className="App">
-      <Container />
+      <AuthContextProvider><Container /></AuthContextProvider>
     </div>
   );
 }
