@@ -5,11 +5,17 @@
         border-color: transparent !important;
         outline: none !important;
 
+    }
+
+    .btn,
+    .btn-primary {
+
         &:focus,
         &:hover,
         &:active,
         .active {
             border: none !important;
+            border-color: #fff !important;
             outline: none !important
         }
     }
