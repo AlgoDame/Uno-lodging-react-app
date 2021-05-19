@@ -21,7 +21,7 @@ const Home = (props: Props) => {
             <section className={styles.Hero}>
                 <div className={styles.Hero_Text}>
                     <h1>
-                        Explore exquisite vacation homes across the world
+                        Explore exquisite vacation homes across Nigeria
                     </h1>
                     <button><span></span>Get Started</button>
                 </div>

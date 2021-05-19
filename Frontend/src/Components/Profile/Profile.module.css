@@ -1,8 +1,17 @@
+.Profile {
+  color: black !important;
+}
+
 .Profile button {
   background-color: transparent !important;
   border: none !important;
   border-color: transparent !important;
   outline: none !important;
+}
+
+.Profile button a {
+  text-decoration: none !important;
+  color: #222 !important;
 }
 
 .Profile .btn:focus, .Profile .btn:hover, .Profile .btn:active,

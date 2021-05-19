@@ -1,6 +1,7 @@
 .Wrapper {
   position: relative;
   bottom: 0;
+  top: 100%;
   width: 100%;
   padding-bottom: 0;
   display: -webkit-box;
@@ -16,7 +17,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: #fefeff;
+  background-color: #fafafa;
 }
 
 .Wrapper * {

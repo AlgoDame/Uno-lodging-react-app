@@ -1,10 +1,18 @@
 .Profile {
+
+    color: black !important;
+
     button {
         background-color: transparent !important;
         border: none !important;
         border-color: transparent !important;
         outline: none !important;
 
+        // font-size: 3rem
+        a {
+            text-decoration: none !important;
+            color: #222 !important
+        }
     }
 
     .btn,

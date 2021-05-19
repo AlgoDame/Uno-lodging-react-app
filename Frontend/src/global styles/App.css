@@ -4,3 +4,7 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
+
+.smooth-provider {
+  max-height: 100%;
+}
