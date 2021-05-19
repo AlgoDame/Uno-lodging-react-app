@@ -20,7 +20,7 @@ const updatelisting_1 = __importDefault(require("./routes/updatelisting"));
 const deleteroom_1 = __importDefault(require("./routes/deleteroom"));
 const allHost_1 = __importDefault(require("./routes/allHost"));
 const allGuests_1 = __importDefault(require("./routes/allGuests"));
-const uploadImage_1 = __importDefault(require("./routes/uploadImage"));
+const roomBooking_1 = __importDefault(require("./routes/roomBooking"));
 const app = express_1.default();
 // view engine setup
 app.set('views', path_1.default.join(__dirname, '../views'));
@@ -40,7 +40,6 @@ app.use(express_1.default.urlencoded({ extended: true, limit: "100mb", parameter
 app.use(cookie_parser_1.default());
 app.use(express_1.default.static(path_1.default.join(__dirname, 'public')));
 app.use('/', index_1.default);
-app.use('/api/upload', uploadImage_1.default);
 app.use('/users', users_1.default);
 app.use('/api/signup', signup_1.default);
 app.use('/api/login', login_1.default);
@@ -51,6 +50,7 @@ app.use('/api/update/id', updatelisting_1.default);
 app.use('/api/delete/id', deleteroom_1.default);
 app.use('/api/getAllHosts', allHost_1.default);
 app.use('/api/allGuests', allGuests_1.default);
+app.use('/api/bookings', roomBooking_1.default);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(http_errors_1.default(404));
