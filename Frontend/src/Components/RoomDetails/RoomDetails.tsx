@@ -13,7 +13,7 @@ interface Props {
     description?: "",
     price?: "",
     location?: "",
-    history?: ""
+    history?: "";
 }
 
 const RoomDetails = (props: Props) => {

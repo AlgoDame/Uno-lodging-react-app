@@ -76,7 +76,7 @@ const AuthContext = React.createContext({
         roomId: ""
     },
     handleRoomClick: (data) => { },
-    formError: ""
+    formError: "",
 
 });
 
@@ -134,6 +134,9 @@ const AuthContextComp = (props: any) => {
         // const { data } = await
         fetchRoomsData();
         fetchUsersData()
+        const loggedInUser = localStorage.getItem("user");
+    }, [])
+    useEffect(() => {
         const loggedInUser = localStorage.getItem("user");
         if (loggedInUser) {
             const foundUser = JSON.parse(loggedInUser);
@@ -255,10 +258,19 @@ const AuthContextComp = (props: any) => {
         if (emailStatus !== "" || passwordStatus !== "") {
             console.log(emailStatus, passwordStatus)
         }
-        const body = { ...userData, type: props.type }
+        const body = { ...userData, type: userType }
         const data = await validateSignup(body)
-        data.message ? setFormError(data.message) : setFormError(data.status);
-        setTimeout(() => setFormError(""), 2000)
+        if (data.status === "Successful") {
+            setLoggedIn(true)
+            setLoggedInUserData(data.data)
+            localStorage.setItem("user", JSON.stringify(data.data));
+            setShow(false)
+        }
+        else {
+            data.message ? setFormError(data.message) : setFormError(data.status);
+            setTimeout(() => setFormError(""), 2000)
+        }
+
         console.log(body)
     }
     const validateLogin = async (body: { email: string; password: string; type: string; }) => {

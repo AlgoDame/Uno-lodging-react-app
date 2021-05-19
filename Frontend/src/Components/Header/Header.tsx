@@ -23,7 +23,7 @@ const Header = (props: Props) => {
 
     // const signedIn = false
     return (
-        <nav className={!scroll ? [styles.Header, styles.Top].join(" ") : [styles.Header, styles.Scroll].join(" ")}>
+        <nav className={scroll || ctx.route !== "/home" ? [styles.Header, styles.Scroll].join(" ") : [styles.Header, styles.Top].join(" ")}>
             <NavLink to="/home" className={styles.Brand}>
                 <svg width="124" height="45" viewBox="0 0 154 55" fill={ctx.route === "/home" ? "#fff" : "#000"} xmlns="http://www.w3.org/2000/svg">
                     <path d="M27.6169 31.8662H26.1169V33.3662V45.945H16.8073V28.6732V27.1732H15.3073H11.974L32.5408 9.53118L53.1076 27.1732H49.7744H48.2744V28.6732V45.945H38.9647V33.3662V31.8662H37.4647H27.6169Z" stroke-width="3" />
@@ -32,14 +32,14 @@ const Header = (props: Props) => {
             </NavLink>
             <SearchBar handleSearch={ctx.handleSearchResults} placeholder="Find a room by location" />
             <div className={styles.Links}>
-                {ctx.loggedIn ? (<div className={styles.lgIn}><LoggedInProfile route={ctx.route} logout={ctx.logout} loggedIn={ctx.loggedIn} signIn={ctx.signIn} signUp={ctx.guestSignUp} /> </div>) : (<>
+                {ctx.loggedIn ? (<div className={styles.lgIn}><LoggedInProfile name={ctx.userData.firstName} route={ctx.route} logout={ctx.logout} loggedIn={ctx.loggedIn} signIn={ctx.signIn} signUp={ctx.guestSignUp} /> </div>) : (<>
                     <button onClick={ctx.hostSignUp}>Become a host</button>
                     <button onClick={ctx.guestSignUp}>Sign up</button>
                     <button onClick={ctx.signIn}>Login</button>
                 </>)}
             </div>
             <div className={styles.Dropdown}>
-                {!ctx.loggedIn ? <MobileProfile logout={ctx.logout} loggedIn={ctx.loggedIn} signIn={ctx.signIn} signUp={ctx.guestSignUp} /> : <LoggedInProfile route={ctx.route} logout={ctx.logout} loggedIn={ctx.loggedIn} signIn={ctx.signIn} signUp={ctx.guestSignUp} />}
+                {!ctx.loggedIn ? <MobileProfile name={ctx.userData.firstName} logout={ctx.logout} loggedIn={ctx.loggedIn} signIn={ctx.signIn} signUp={ctx.guestSignUp} /> : <LoggedInProfile name={ctx.userData.firstName} route={ctx.route} logout={ctx.logout} loggedIn={ctx.loggedIn} signIn={ctx.signIn} signUp={ctx.guestSignUp} />}
             </div>
 
         </nav>

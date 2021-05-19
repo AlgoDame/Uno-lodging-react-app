@@ -26,6 +26,12 @@
   }
 }
 
+@media only screen and (min-width: 1280px) {
+  .Header {
+    padding: 30px 100px;
+  }
+}
+
 .Header .Brand svg {
   height: 34px;
   margin-left: -10px;
@@ -94,6 +100,13 @@
   }
 }
 
+@media only screen and (min-width: 1280px) {
+  .Header .Links {
+    display: block;
+    right: 100px;
+  }
+}
+
 .Header .Links > button {
   color: #000;
   padding: 15px;
@@ -135,6 +148,8 @@
   background-color: rgba(255, 255, 255, 0.5);
   -webkit-backdrop-filter: blur(20px);
           backdrop-filter: blur(20px);
+  -webkit-box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .Scroll button {

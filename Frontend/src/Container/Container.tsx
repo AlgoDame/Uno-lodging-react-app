@@ -24,7 +24,7 @@ const Container = (props: Props) => {
                     <Suspense fallback={<div>Loading...</div>}>
                         <RoomDetails />
                     </Suspense>} />
-                <Route path="/rooms" render={() =>
+                <Route path="/rooms/:location" render={() =>
                     <Suspense fallback={<div>Loading...</div>}>
                         <RoomsList />
                     </Suspense>} />

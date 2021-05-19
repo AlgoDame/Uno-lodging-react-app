@@ -10,7 +10,8 @@ interface Props {
     signUp: () => void,
     loggedIn: boolean,
     logout: () => void,
-    route?: string
+    route?: string,
+    name: string
 }
 
 export const MobileProfile = (props: Props) => {
@@ -38,6 +39,8 @@ export const LoggedInProfile = (props: Props) => {
         <div className={styles.Profile}>
             {/* <div className={styles.Dropdown}> */}
             <DropdownButton className={styles.dropdownBtn} id="dropdown-basic-button" title={<i style={style}><CgProfile /></i>}>
+                <Dropdown.Item className={styles.username}>{props.name}</Dropdown.Item>
+                <Dropdown.Divider />
                 <Dropdown.Item><NavLink to="">Profile</NavLink></Dropdown.Item>
                 <Dropdown.Item onClick={props.signIn}><NavLink to="">Become a Host</NavLink></Dropdown.Item>
                 <Dropdown.Item onClick={props.logout}><NavLink to="" >Logout</NavLink></Dropdown.Item>

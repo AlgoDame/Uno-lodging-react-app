@@ -1,6 +1,15 @@
 .Profile {
 
     color: black !important;
+    margin-right: 20px;
+
+    .username {
+        font-size: 1.1rem !important;
+        color: #000;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .5px
+    }
 
     button {
         background-color: transparent !important;

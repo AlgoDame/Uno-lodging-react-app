@@ -17,22 +17,30 @@ import updateListingRouter from './routes/updatelisting';
 import deleteRoomRouter from './routes/deleteroom';
 import allHostRouter from './routes/allHost';
 import allGuests from './routes/allGuests';
+import uploadImage from './routes/uploadImage';
 
 const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'jade');
-
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Credentials', "true");
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization header');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  next();
+});
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: "100mb", parameterLimit: 500000 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/api/upload', uploadImage);
 app.use('/users', usersRouter);
 app.use('/api/signup', signupRouter);
 app.use('/api/login', loginRouter);

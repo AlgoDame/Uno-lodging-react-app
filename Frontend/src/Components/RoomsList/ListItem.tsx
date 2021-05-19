@@ -6,7 +6,8 @@ interface Props {
     title: string,
     location: string,
     price: string,
-    hostName: string
+    hostName: string;
+    click: (data) => void
 
 }
 
@@ -30,8 +31,8 @@ const RoomList = (props: Props) => {
                 <h5>Hosted by: {props.hostName}</h5>
                 <div>
                     <span>{props.price}</span>
-                    <Button type="submit" variant="dark">
-                        Book Now
+                    <Button type="submit" variant="dark" onClick={() => props.click(props.title)}>
+                        View
                     </Button>
                 </div>
             </div>
