@@ -23,13 +23,16 @@
 @media only screen and (min-width: 768px) {
   .Header {
     padding: 30px 50px;
-    height: 100px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .Header {
+    padding: 30px 100px;
   }
 }
 
 .Header .Brand svg {
-  stroke: white;
-  fill: white;
   height: 34px;
   margin-left: -10px;
 }
@@ -69,6 +72,19 @@
   height: 34px;
 }
 
+.Header .lgIn i {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 0;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.Header .lgIn i * svg {
+  height: 34px;
+}
+
 .Header .Links {
   display: none;
   position: absolute !important;
@@ -84,37 +100,64 @@
   }
 }
 
+@media only screen and (min-width: 1280px) {
+  .Header .Links {
+    display: block;
+    right: 100px;
+  }
+}
+
 .Header .Links > button {
-  color: #fff;
+  color: #000;
   padding: 15px;
-  height: 50px;
-  font-weight: 600;
+  height: 40px;
+  border-radius: 6px;
+  font-weight: 500;
   outline: none;
   border: none;
-  background-color: transparent;
-  font-size: 1.1rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  font-size: 1rem;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-left: 10px;
+  -webkit-transition: all .2s ease-in;
+  transition: all .2s ease-in;
 }
 
 .Header .Links > button:hover {
-  background-color: #111;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
-.Scroll {
-  background-color: #fff;
+.Header .Links > button:last-child {
+  background-color: #010101;
+  color: #fff !important;
+  border: 1px solid #000;
 }
 
-.Scroll button {
+.Header .Links > button:last-child:hover {
+  background-color: rgba(255, 255, 255, 0.5);
   color: #000 !important;
 }
 
+.Scroll {
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(20px);
+          backdrop-filter: blur(20px);
+  -webkit-box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.Scroll button {
+  color: #4a4a3a !important;
+}
+
 .Scroll button:hover {
-  color: #fff !important;
+  color: #000 !important;
 }
 
 .Scroll .Brand svg {
@@ -122,6 +165,11 @@
   fill: black;
 }
 
-.Scroll .Dropdown i {
+.Scroll .lgIn i {
+  color: black;
+}
+
+.Scroll .Dropdown i,
+.Scroll .lgIn i {
   color: #000;
 }

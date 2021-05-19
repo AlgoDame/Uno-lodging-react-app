@@ -52,5 +52,6 @@
     "@types/react-bootstrap": "^0.32.25",
     "@types/react-router-dom": "^5.1.7",
     "typings-for-css-modules-loader": "^1.7.0"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

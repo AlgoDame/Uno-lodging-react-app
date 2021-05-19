@@ -81,29 +81,32 @@
             width: 200px;
             height: 40px;
             border-radius: 8px;
-            background: #000;
+            background: #fff;
             // background: #4982ff;
-            color: #fff;
+            color: #000;
             // color: #E94259;
             padding: 0 30px;
             outline: none;
             border: none;
             font-weight: 600;
-            font-size: 1.2rem;
+            font-size: 1rem;
             margin-top: 30px;
             position: relative;
+            letter-spacing: 1px;
             z-index: 1;
-            transition: all .4s ease-in-out;
+            // text-transform: uppercase;
+            // transition: all .4s ease-in-out;
 
 
 
             span {
                 width: 0;
-                transition: all .4s ease-in-out;
+                opacity: .7;
+                transition: all .5s ease-out;
             }
 
             &:hover {
-                color: #000;
+                color: #fff;
                 background-color: transparent;
 
                 span {
@@ -114,12 +117,13 @@
                     width: 100%;
                     height: 100%;
                     border-radius: 8px;
-                    background-color: #fff;
+                    background-color: #000;
+                    opacity: 1;
                 }
             }
 
             @media(min-width: 978px) {
-                font-size: 1.4rem;
+                font-size: 1.1rem;
                 width: 250px;
                 height: 50px;
 

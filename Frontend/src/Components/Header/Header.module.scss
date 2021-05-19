@@ -2,6 +2,7 @@
     box-sizing: border-box;
     width: 100vw;
     height: 80px;
+    // margin-bottom: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -11,15 +12,17 @@
     z-index: 2000;
     transition: all .6s ease;
 
+
     @media only screen and (min-width: 768px) {
         padding: 30px 50px;
-        height: 100px
+        // height: 100px
+    }
+
+    @media only screen and (min-width: 1280px) {
+        padding: 30px 100px // height: 100px
     }
 
     .Brand svg {
-        stroke: white;
-        fill: white;
-        // width: max-content;
         height: 34px;
         margin-left: -10px;
 
@@ -56,6 +59,20 @@
 
     }
 
+    .lgIn {
+        i {
+            height: max-content;
+            padding: 0;
+            font-size: 2rem;
+            font-weight: 900;
+            // color: #fff;
+
+            * svg {
+                height: 34px;
+            }
+        }
+    }
+
     .Links {
         display: none;
         position: absolute !important;
@@ -63,25 +80,50 @@
         top: 50%;
         transform: translateY(-50%);
 
+
+
         @media only screen and (min-width: 1024px) {
             display: block;
         }
 
+        @media only screen and (min-width: 1280px) {
+            display: block;
+            right: 100px
+        }
+
         >button {
-            color: #fff;
+            color: #000;
             padding: 15px;
-            height: 50px;
-            // border-radius: 20px;
-            font-weight: 600;
+            height: 40px;
+            border-radius: 6px;
+            font-weight: 500;
             outline: none;
             border: none;
-            background-color: transparent;
-            font-size: 1.1rem;
+            background-color: rgba(255, 255, 255, .3);
+            font-size: 1rem;
             display: inline-flex;
             align-items: center;
+            margin-left: 10px;
+            transition: all .2s ease-in;
 
             &:hover {
-                background-color: #111
+                background-color: rgba(255, 255, 255, .8);
+                // border: 1px solid #555
+                // color: #000 !important;
+                // border-bottom: 3px solid #000;
+            }
+
+            &:last-child {
+                background-color: #010101;
+                color: #fff !important;
+
+                border: 1px solid #000;
+
+                &:hover {
+                    background-color: rgba(255, 255, 255, .5);
+                    color: #000 !important
+                }
+
             }
         }
     }
@@ -93,14 +135,19 @@
 }
 
 .Scroll {
-    background-color: #fff;
+    border-bottom: .5px solid rgba(0, 0, 0, .1);
+    background-color: rgba(255, 255, 255, .5);
+    backdrop-filter: blur(20px);
+    box-shadow: 3px 0 10px rgba(0, 0, 0, .3);
 
     button {
-        color: #000 !important;
+        color: #4a4a3a !important;
 
         &:hover {
-            color: #fff !important
+            color: #000 !important
         }
+
+
     }
 
     .Brand svg {
@@ -108,7 +155,14 @@
         fill: black;
     }
 
-    .Dropdown {
+    .lgIn {
+        i {
+            color: black
+        }
+    }
+
+    .Dropdown,
+    .lgIn {
         i {
             color: #000
         }

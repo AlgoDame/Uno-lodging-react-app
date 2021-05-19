@@ -1,6 +1,8 @@
 .Wrapper {
     position: relative;
     bottom: 0;
+    top: 100%;
+    // transform: translateY(-100%);
     width: 100%;
     // padding: 30px;
     padding-bottom: 0;
@@ -8,7 +10,7 @@
     flex-flow: column;
     align-items: center;
     justify-content: center;
-    background-color: #fefeff;
+    background-color: #fafafa;
 
     * {
         box-sizing: border-box;

@@ -10,19 +10,20 @@ import AuthContext from "../../store/AuthContext"
 interface Props {
 
 }
-const getBase64 = (file: File, cb) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-        let buf = reader.result;
-        if (buf) {
-            cb(buf.toString())
-        }
-    };
-    reader.onerror = function (error) {
-        console.log('Error: ', error);
-    };
-}
+// const getBase64 = (file: File, cb) => {
+//     let reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onload = function () {
+//         let buf = reader.result;
+//         if (buf) {
+//             cb(buf.toString())
+//         }
+//     };
+//     reader.onerror = function (error) {
+//         console.log('Error: ', error);
+//     };
+// }
+
 const Signup = (props: Props) => {
 
     const ctx = useContext(AuthContext);
@@ -64,7 +65,7 @@ const Signup = (props: Props) => {
     //                 url: `http://localhost:5000/api/signup`,
     //                 headers: {
     //                     'content-type': 'application/x-www-form-urlencoded'
-    //                 },
+    //                 },()
     //                 data: { files },
 
     //             }).then(res => console.log(res)).catch(e => console.log(e))
@@ -135,6 +136,7 @@ const Signup = (props: Props) => {
                 {/* <Form.Group>
                     <Form.File id="exampleFormControlFile1" label="Example file input" name="image" ref={fileUploads} multiple />
                 </Form.Group> */}
+                {ctx.formError !== "" && <div style={{ "color": "red", "textAlign": "center", "letterSpacing": "1px" }}>{ctx.formError}</div>}
                 <Button className={styles.Submit} value={ctx.userType} type="submit" onClick={ctx.handleSignupSubmit}>
                     {ctx.loading ? <p style={{ "display": "flex", "alignItems": "center", "justifyContent": "space-around", "padding": "0 10px" }}>Signing you up...  <Spinner animation="border" variant="primary" /> </p> : "Sign Up"}
                 </Button>
@@ -169,6 +171,7 @@ const Signup = (props: Props) => {
                         </Form.Control>
                     </Form.Group>
                 </Form.Row>
+                {ctx.formError !== "" && <div style={{ "color": "red", "textAlign": "center", "letterSpacing": "1px" }}>{ctx.formError}</div>}
                 <Button className={styles.Submit} onClick={ctx.handleLoginSubmit} type="submit">
                     {ctx.loading ? <p style={{ "display": "flex", "alignItems": "center", "justifyContent": "space-around", "padding": "0 10px" }}>Logging you in...  <Spinner animation="border" variant="primary" /> </p> : "Login"}
                 </Button>
@@ -185,7 +188,7 @@ const Signup = (props: Props) => {
         <div>
             <Modal
                 show={ctx.show}
-                title={ctx.isSignup ? "Signup" : "Login"}
+                title={ctx.isSignup ? `Signup as ${ctx.userType}` : "Login"}
                 toggle={ctx.toggleModal}
             >
                 {signup}

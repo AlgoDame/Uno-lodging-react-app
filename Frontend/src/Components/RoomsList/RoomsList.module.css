@@ -1,0 +1,184 @@
+.Wrapper {
+  margin-top: 80px;
+  padding: 30px;
+}
+
+.Wrapper .ListItem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 20px 0;
+  border-bottom: 2px solid #ddd;
+  border-top: 2px solid #ddd;
+}
+
+.Wrapper .ListItem .Carousel {
+  height: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.Wrapper .ListItem .Carousel img {
+  -o-object-fit: cover !important;
+     object-fit: cover !important;
+  min-height: 300px;
+}
+
+.Wrapper .ListItem .details {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 10px 0;
+  margin-top: 10px;
+}
+
+.Wrapper .ListItem .details h3 {
+  font-size: 1.2rem;
+}
+
+.Wrapper .ListItem .details > span {
+  font-size: 1rem;
+}
+
+.Wrapper .ListItem .details h5 {
+  padding: 10px 0;
+  font-size: 1rem;
+  overflow-y: hidden;
+}
+
+.Wrapper .ListItem .details div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Wrapper .ListItem .details div * {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.Wrapper .ListItem .details div span {
+  padding: 10px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: green;
+}
+
+.Wrapper .ListItem .details div button {
+  max-width: 90px !important;
+}
+
+@media (min-width: 678px) {
+  .Wrapper .ListItem {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row;
+            flex-flow: row;
+    height: 220px;
+  }
+  .Wrapper .ListItem .details {
+    -webkit-box-flex: 2;
+        -ms-flex: 2;
+            flex: 2;
+    padding: 0 20px;
+    height: 100%;
+    margin-top: 0;
+  }
+  .Wrapper .ListItem .details h3 {
+    font-size: 1.3rem;
+  }
+  .Wrapper .ListItem .details span {
+    font-size: 1.1rem;
+  }
+  .Wrapper .ListItem .details h5 {
+    font-size: 1.1rem;
+  }
+  .Wrapper .ListItem .details div span {
+    font-size: 1.4rem;
+  }
+  .Wrapper .ListItem .details div button {
+    max-width: 120px !important;
+    padding: 8px;
+    font-size: 1.2rem;
+  }
+  .Wrapper .ListItem .Carousel {
+    -webkit-box-flex: 1.2;
+        -ms-flex: 1.2;
+            flex: 1.2;
+  }
+}
+
+@media (min-width: 768px) {
+  .Wrapper {
+    padding: 50px;
+  }
+  .Wrapper .ListItem {
+    height: 250px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .Wrapper {
+    padding: 50px;
+  }
+  .Wrapper .ListItem {
+    height: 300px;
+  }
+  .Wrapper .ListItem .details {
+    -webkit-box-flex: 2;
+        -ms-flex: 2;
+            flex: 2;
+    padding: 0 20px;
+    height: 100%;
+  }
+  .Wrapper .ListItem .details h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .Wrapper .ListItem .details span {
+    font-size: 1.2rem;
+  }
+  .Wrapper .ListItem .details h5 {
+    font-size: 1.2rem;
+  }
+  .Wrapper .ListItem .details div span {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .Wrapper {
+    padding: 100px;
+  }
+  .Wrapper .ListItem {
+    height: 350px;
+  }
+  .Wrapper .ListItem .details {
+    -webkit-box-flex: 2;
+        -ms-flex: 2;
+            flex: 2;
+    padding: 0 30px;
+    height: 100%;
+  }
+}

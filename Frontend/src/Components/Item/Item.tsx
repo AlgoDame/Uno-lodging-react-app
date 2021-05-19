@@ -1,5 +1,6 @@
 import React from 'react'
-import styles from "./Item.module.css"
+import styles from "./Item.module.css";
+import { Link } from "react-router-dom"
 interface Props {
     image: string;
     // rating: number;
@@ -15,18 +16,18 @@ const Item = (props: Props) => {
                 <img src={props.image} alt="" />
                 {props.hover ? <div className={styles.Overlay}>
                     {/* <p>Best for businesses that need Office apps across devices plus professional email, cloud file storage, and online meetings</p> */}
-                    <button>Explore</button>
+                    <button><Link to={`/rooms/${props.title}`}>Explore</Link></button>
                     {/* <div>
-                        <div><img src={share} alt="" /><span>Share</span></div>
-                        <div><img src={likeButton} alt="" /><span>Like</span></div>
-                    </div> */}
+                            <div><img src={share} alt="" /><span>Share</span></div>
+                            <div><img src={likeButton} alt="" /><span>Like</span></div>
+                        </div> */}
                 </div> : null}
             </div>
             {/* <div className={styles.Ratings}>
-                {ratings.map((rating, idx) => {
-                    return <img key={idx} src={rating} alt="" />
-                })}
-            </div> */}
+                    {ratings.map((rating, idx) => {
+                        return <img key={idx} src={rating} alt="" />
+                    })}
+                </div> */}
             <h3>{props.title}</h3>
             {props.price ? <p className={styles.Price}>{props.price}</p> : null}
         </div>

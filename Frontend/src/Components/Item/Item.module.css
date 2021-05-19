@@ -91,6 +91,11 @@
   color: #fff;
 }
 
+.Item > .imgWrapper .Overlay button a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .Item > .imgWrapper .Overlay > div {
   width: 80%;
   display: -webkit-box;
@@ -138,6 +143,8 @@
   font-weight: 700;
   text-transform: uppercase;
   margin: 20px 0;
+  color: inherit !important;
+  text-decoration: none !important;
 }
 
 .Item .Price {

@@ -51,6 +51,7 @@
             }
 
             button {
+
                 width: 160px;
                 height: 40px;
                 color: #111;
@@ -64,6 +65,11 @@
                 &:hover {
                     background-color: #000;
                     color: #fff;
+                }
+
+                a {
+                    text-decoration: none;
+                    color: inherit;
                 }
             }
 
@@ -130,6 +136,8 @@
         font-weight: 700;
         text-transform: uppercase;
         margin: 20px 0;
+        color: inherit !important;
+        text-decoration: none !important;
     }
 
     .Price {

@@ -1,10 +1,27 @@
 .Profile {
+
+    color: black !important;
+    margin-right: 20px;
+
+    .username {
+        font-size: 1.1rem !important;
+        color: #000;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .5px
+    }
+
     button {
         background-color: transparent !important;
         border: none !important;
         border-color: transparent !important;
         outline: none !important;
 
+        // font-size: 3rem
+        a {
+            text-decoration: none !important;
+            color: #222 !important
+        }
     }
 
     .btn,

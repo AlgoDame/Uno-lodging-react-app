@@ -1,7 +1,9 @@
-import React from 'react'
-import classes from './SearchBar.module.css'
+import React, { ChangeEvent } from 'react'
+import classes from './SearchBar.module.css';
+
 interface Props {
     placeholder: string,
+    handleSearch: (e: ChangeEvent<HTMLInputElement>) => void
 
 }
 
@@ -9,7 +11,7 @@ interface Props {
 const SearchBar = (props: Props) => {
     return (
         <div className={classes.Search}>
-            <input type="text" placeholder={props.placeholder} />
+            <input type="text" placeholder={props.placeholder} onChange={props.handleSearch} />
         </div>
     )
 }

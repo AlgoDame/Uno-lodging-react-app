@@ -1,0 +1,211 @@
+.Wrapper {
+    margin-top: 80px;
+    padding: 30px;
+
+    .ListItem {
+        display: flex;
+        flex-direction: column;
+        padding: 20px 0;
+        border-bottom: 2px solid #ddd;
+        border-top: 2px solid #ddd;
+        // height: 150px;
+
+        .Carousel {
+            // flex: 1.3;
+            height: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+
+            img {
+                object-fit: cover !important;
+                min-height: 300px;
+            }
+        }
+
+        .details {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around; // height: 300px;
+            // flex: 2;
+            height: fit-content;
+            padding: 10px 0;
+
+            margin-top: 10px;
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            >span {
+                font-size: 1rem;
+                // margin-top: -5px
+            }
+
+            h5 {
+                // height: 100px;
+                padding: 10px 0;
+                font-size: 1rem;
+                overflow-y: hidden;
+
+            }
+
+            div {
+                // position: absolute;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                * {
+                    flex: 1
+                }
+
+
+
+                span {
+                    padding: 10px 0;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: green;
+
+                }
+
+
+
+                button {
+                    // height: 34px !important;
+                    max-width: 90px !important;
+                    // font-size: .9rem
+                }
+            }
+        }
+    }
+
+    @media (min-width: 500px) {
+        .ListItem {
+            .details {}
+        }
+    }
+
+    @media (min-width: 678px) {
+
+        .ListItem {
+            flex-flow: row;
+            height: 220px;
+
+            .details {
+                flex: 2;
+                padding: 0 20px;
+                height: 100%;
+                margin-top: 0;
+
+                h3 {
+                    font-size: 1.3rem;
+
+                }
+
+                span {
+                    font-size: 1.1rem
+                }
+
+                h5 {
+                    font-size: 1.1rem
+                }
+
+                div {
+                    span {
+                        font-size: 1.4rem;
+                    }
+
+                    button {
+                        // height: 34px !important;
+                        max-width: 120px !important;
+                        padding: 8px;
+                        font-size: 1.2rem
+                    }
+                }
+
+            }
+
+            .Carousel {
+                flex: 1.2
+            }
+        }
+    }
+
+    @media(min-width: 768px) {
+        padding: 50px;
+
+        .ListItem {
+            // min-height: 200px;
+            height: 250px;
+        }
+    }
+
+    @media(min-width: 1024px) {
+        padding: 50px;
+
+        .ListItem {
+            height: 300px;
+
+            .details {
+                flex: 2;
+                padding: 0 20px;
+                height: 100%;
+
+                h3 {
+                    font-size: 1.6rem;
+                    font-weight: 700;
+
+                }
+
+                span {
+                    font-size: 1.2rem
+                }
+
+                h5 {
+                    font-size: 1.2rem
+                }
+
+                div {
+                    span {
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+        }
+    }
+
+    @media(min-width: 1280px) {
+        padding: 100px;
+
+        .ListItem {
+            height: 350px;
+
+            .details {
+                flex: 2;
+                padding: 0 30px;
+                height: 100%;
+
+                // h3 {
+                //     // font-size: 1.8rem;
+
+                // }
+
+                // span {
+                //     font-size: 1.4rem
+                // }
+
+                // h5 {
+                //     font-size: 1.4rem
+                // }
+
+                // div {
+                //     span {
+                //         font-size: 1.6rem;
+                //     }
+                // }
+            }
+        }
+    }
+}

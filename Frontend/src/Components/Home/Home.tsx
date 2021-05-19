@@ -21,7 +21,7 @@ const Home = (props: Props) => {
             <section className={styles.Hero}>
                 <div className={styles.Hero_Text}>
                     <h1>
-                        Explore exquisite vacation homes across the world
+                        Explore exquisite vacation homes across Nigeria
                     </h1>
                     <button><span></span>Get Started</button>
                 </div>
@@ -79,7 +79,7 @@ const Home = (props: Props) => {
                     <Item title="Lagos" image={bg2} hover={true} />
                     <Item title="Abuja" image={bg3} hover={true} />
                     <Item title="Portharcourt" image={img3} hover={true} />
-                    <Item title="Kaduna" image={img2} hover={true} />
+                    <Item title="Ibadan" image={img2} hover={true} />
                 </div>
             </section>
         </div>
