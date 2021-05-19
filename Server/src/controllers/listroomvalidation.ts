@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-function validateRoomListing(requestBody:Record<string, any>) {
+function listroomvalidation(requestBody:Record<string, any>) {
     const schema = {
         title: Joi.string().required(),
         description: Joi.string().required(),
@@ -21,7 +21,7 @@ function validateRoomListing(requestBody:Record<string, any>) {
     
 }
 
-export default validateRoomListing;
+export default listroomvalidation;
 
 /**
  * {

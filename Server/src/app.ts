@@ -4,7 +4,6 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from "cors";
-import formidable from "formidable";
 import bodyParser from "body-parser";
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
@@ -17,7 +16,7 @@ import updateListingRouter from './routes/updatelisting';
 import deleteRoomRouter from './routes/deleteroom';
 import allHostRouter from './routes/allHost';
 import allGuests from './routes/allGuests';
-import uploadImage from './routes/uploadImage';
+import roomBooking from './routes/roomBooking';
 
 const app = express();
 
@@ -40,7 +39,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/api/upload', uploadImage);
 app.use('/users', usersRouter);
 app.use('/api/signup', signupRouter);
 app.use('/api/login', loginRouter);
@@ -51,6 +49,7 @@ app.use('/api/update/id', updateListingRouter);
 app.use('/api/delete/id', deleteRoomRouter);
 app.use('/api/getAllHosts', allHostRouter);
 app.use('/api/allGuests', allGuests);
+app.use('/api/bookings', roomBooking);
 
 
 // catch 404 and forward to error handler
