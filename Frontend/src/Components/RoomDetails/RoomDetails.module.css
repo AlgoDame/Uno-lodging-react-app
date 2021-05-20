@@ -23,7 +23,7 @@
 
 .Main .Content img {
   max-width: 100%;
-  height: auto;
+  height: 400px;
   -o-object-fit: cover;
      object-fit: cover;
   margin: 0 auto;

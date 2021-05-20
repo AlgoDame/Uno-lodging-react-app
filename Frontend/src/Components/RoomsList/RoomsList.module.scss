@@ -45,8 +45,10 @@
             h5 {
                 // height: 100px;
                 padding: 10px 0;
-                font-size: 1rem;
+                font-size: .9rem;
                 overflow-y: hidden;
+                color: #555;
+
 
             }
 
@@ -81,11 +83,10 @@
         }
     }
 
-    @media (min-width: 500px) {
-        .ListItem {
-            .details {}
-        }
-    }
+    // @media (min-width: 500px) {
+    //     .ListItem {
+    //     }
+    // }
 
     @media (min-width: 678px) {
 

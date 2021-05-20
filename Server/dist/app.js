@@ -46,7 +46,7 @@ app.use('/api/login', login_1.default);
 app.use('/api/rooms', getallrooms_1.default);
 app.use('/api/host/listing', listroom_1.default);
 app.use('/api/admin/users', admin_1.default);
-app.use('/api/update/id', updatelisting_1.default);
+app.use('/api/update', updatelisting_1.default);
 app.use('/api/delete/id', deleteroom_1.default);
 app.use('/api/getAllHosts', allHost_1.default);
 app.use('/api/allGuests', allGuests_1.default);

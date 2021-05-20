@@ -4,12 +4,11 @@ import styles from './RoomsList.module.css';
 import { RoomData } from '../../store/AuthContext'
 import AuthContext from '../../store/AuthContext'
 import { useEffect, useState, useContext } from "react";
-import { useParams, Route } from "react-router-dom"
-interface Props {
+import { useParams, Route } from "react-router-dom";
 
-}
 
-const RoomsList = (props: Props) => {
+
+const RoomsList = () => {
     const [data, setData] = useState([] as RoomData[])
     const { location } = useParams() as {
         location: string
@@ -25,7 +24,7 @@ const RoomsList = (props: Props) => {
     return (
         <Route path="/rooms/:location">
             <div className={styles.Wrapper}>
-                {data.map(room => (<ListItem key={room.roomId} click={ctx.handleRoomClick} title={room.title} price={room.price} location={room.location} hostName={room.hostname} />))}
+                {data.map(room => (<ListItem imageUrl={room.imageUrl} key={room.roomId} features={room.features} click={ctx.handleRoomClick} title={room.title} price={room.price} location={room.location} hostName={room.hostname} />))}
                 {/* <ListItem /> */}
             </div>
         </Route>

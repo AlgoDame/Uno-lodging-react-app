@@ -4,7 +4,7 @@ import img2 from "../../assets/homeBg2.svg"
 import styles from "./RoomDetails.module.css"
 import { Carousel, Form, Button } from "react-bootstrap"
 import AuthContext from "../../store/AuthContext"
-import { useParams, Redirect } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { RoomData } from "../../store/AuthContext"
 
 
@@ -34,20 +34,14 @@ const RoomDetails = (props: Props) => {
         } >
             <div className={styles.Content}>
                 <Carousel interval={2000}>
-                    <Carousel.Item>
+                    {data.imageUrl && data.imageUrl.length > 0 && data.imageUrl.map(url => <Carousel.Item>
                         <img
                             className="d-block w-100"
-                            src={img1}
+                            src={url}
                             alt=""
                         />
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100"
-                            src={img2}
-                            alt=""
-                        />
-                    </Carousel.Item>
+                    </Carousel.Item>)
+                    }
                 </Carousel>
                 <h2>{data.title}</h2>
                 <div className={styles.info}>
@@ -59,6 +53,7 @@ const RoomDetails = (props: Props) => {
                     </span>
                 </div>
                 <p className={styles.desc}>{data.description}</p>
+                <p className={styles.desc}>{data.features}</p>
             </div>
             <div className={styles.Form}>
                 <h5>
