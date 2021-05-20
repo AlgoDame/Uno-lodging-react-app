@@ -12,19 +12,19 @@ import axios from 'axios';
 interface Props {
 
 }
-const getBase64 = (file: File, cb) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-        let buf = reader.result;
-        if (buf) {
-            cb(buf.toString())
-        }
-    };
-    reader.onerror = function (error) {
-        console.log('Error: ', error);
-    };
-}
+// const getBase64 = (file: File, cb) => {
+//     let reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onload = function () {
+//         let buf = reader.result;
+//         if (buf) {
+//             cb(buf.toString())
+//         }
+//     };
+//     reader.onerror = function (error) {
+//         console.log('Error: ', error);
+//     };
+// }
 
 
 const Signup = (props: Props) => {

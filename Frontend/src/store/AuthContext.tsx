@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, ChangeEvent, MouseEvent } from "react";
 import axios from "axios"
-import { withRouter, Redirect, useParams } from "react-router-dom"
+import { withRouter, Redirect } from "react-router-dom"
 const initialData = {
     email: "",
     password: "",
@@ -17,7 +17,10 @@ export interface RoomData {
     description: string;
     location: string;
     title: string;
-    roomId: string
+    roomId: string;
+    features: string;
+    booked: boolean,
+    imageUrl: string[]
 }
 const AuthContext = React.createContext({
     loading: false,
@@ -52,7 +55,10 @@ const AuthContext = React.createContext({
         description: "",
         location: "",
         title: "",
-        roomId: ""
+        roomId: "",
+        features: "",
+        booked: false,
+        imageUrl: [""]
     }],
     searchResults: [{
         hostid: "",
@@ -61,6 +67,9 @@ const AuthContext = React.createContext({
         description: "",
         location: "",
         title: "",
+        features: "",
+        booked: false,
+        imageUrl: [""]
     }],
     handleSearchResults: (e: ChangeEvent<HTMLInputElement>) => { },
     showResults: false,
@@ -73,7 +82,10 @@ const AuthContext = React.createContext({
         description: "",
         location: "",
         title: "",
-        roomId: ""
+        roomId: "",
+        features: "",
+        booked: false,
+        imageUrl: [""]
     },
     handleRoomClick: (data) => { },
     formError: "",
@@ -84,7 +96,7 @@ const AuthContextComp = (props: any) => {
 
     // const [files, setFiles] = useState<(string | Buffer)[]>([]);
     const [userData, setUserData] = useState(initialData)
-    const [allUsers, setAllUsers] = useState([])
+    // const [allUsers, setAllUsers] = useState([])
     const [roomShown, setRoomShown] = useState({} as RoomData)
     const [roomsData, setRoomsData] = useState<RoomData[]>([])
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
@@ -123,6 +135,7 @@ const AuthContextComp = (props: any) => {
         try {
             const res = await axios.get("http://localhost:5000/api/allGuests")
             const { data } = await res;
+            return data
             // const newData = [...data]
             // setRoomsData(data);
         } catch (e) {
@@ -134,7 +147,6 @@ const AuthContextComp = (props: any) => {
         // const { data } = await
         fetchRoomsData();
         fetchUsersData()
-        const loggedInUser = localStorage.getItem("user");
     }, [])
     useEffect(() => {
         const loggedInUser = localStorage.getItem("user");
@@ -152,21 +164,21 @@ const AuthContextComp = (props: any) => {
         if (value === "") setShowResults(false)
         else {
             setShowResults(true)
-            const results = roomsData.filter(item => item.location.toLowerCase().indexOf(value.toLowerCase()) !== -1
+            const results = roomsData.filter(item => item.location && item.location.toLowerCase().indexOf(value.toLowerCase()) !== -1
             );
             setSearchResults(results)
         }
 
 
     }
-    const validateEmail = (email: string) => {
-        const testRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
-        return testRegex.test(email)
-    }
-    const validatePassword = (password: string) => {
-        let numReg = /[0-9]/g
-        return password.trim().length >= 7 && numReg.test(password)
-    }
+    // const validateEmail = (email: string) => {
+    //     const testRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+    //     return testRegex.test(email)
+    // }
+    // const validatePassword = (password: string) => {
+    //     let numReg = /[0-9]/g
+    //     return password.trim().length >= 7 && numReg.test(password)
+    // }
     const handleRoomClick = (title: string) => {
         // return (e: MouseEventHandler<HTMLDivElement>) => {
         //This should later be handled with a unique room id
