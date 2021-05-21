@@ -8,6 +8,7 @@ function validateSignup(requestBody: Record<string, any>) {
     email: Joi.string().email().required(),
     password: Joi.string().min(7).required(),
     type: Joi.string().required(),
+    favorites: Joi.array()
   };
   const result = Joi.validate(requestBody, schema);
   if (result.error) {

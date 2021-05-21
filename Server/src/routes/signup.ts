@@ -11,17 +11,26 @@ router.post("/", function (req: Request, res: Response, next: NextFunction) {
       return res.status(400).end()
    }
    const addUser = (category: string) => {
+      let allUsers: Record<string, any>[] = [];
       db.collection(category)
-         .add(req.body)
+         .get()
          .then((resp) => {
-            return res
-               .status(201)
-               .json({ status: "Successful", data: req.body, resp });
+            allUsers = resp.docs.map((user) => ({ ...user.data() }));
+            let ID: string = req.body.email;
+            const body = { ...req.body, allUsers };
+            db.collection(category)
+               .doc(`${ID}`)
+               .set(body)
+               .then((resp) => {
+                  return res
+                     .status(201)
+                     .json({ status: "Successful", data: req.body, resp });
+               })
+               .catch((err) => {
+                  res.json({ err });
+                  return res.status(400).end()
+               });
          })
-         .catch((err) => {
-            res.json({ err });
-            return res.status(400).end()
-         });
    };
 
 
@@ -31,7 +40,7 @@ router.post("/", function (req: Request, res: Response, next: NextFunction) {
             .get()
             .then((resp) => {
                const hosts = resp.docs.map((doc) => ({ ...doc.data() }));
-               if (!hosts.find((host) => host.email === email)) {
+               if (!hosts.find((host) => host.email.toLowerCase() === email.toLowerCase())) {
                   addUser("hosts");
                } else {
                   res.json({ message: "Email already exists!!!" });

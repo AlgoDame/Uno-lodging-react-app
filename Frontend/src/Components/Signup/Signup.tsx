@@ -40,44 +40,44 @@ const Signup = (props: Props) => {
     const ctx = useContext(AuthContext);
     const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
         console.log('i was clicked');
-        
+
         e.preventDefault();
 
         const formData = new FormData();
-            formData.append("image", file)
-            formData.append("title", "test image")
+        formData.append("image", file)
+        formData.append("title", "test image")
 
-        const config ={
+        const config = {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
         };
-        const url ='http://localhost:5000/api/host/listing';
+        const url = 'http://localhost:5000/api/host/listing';
         axios.post(url, formData, config)
-        .then((res) => {
-            console.log('Image was uploaded successfully!!!');
-            console.log(res.data)
-        }).catch((err) => {
-            console.log('from me:', err);
-            
-        })
+            .then((res) => {
+                console.log('Image was uploaded successfully!!!');
+                console.log(res.data)
+            }).catch((err) => {
+                console.log('from me:', err);
+
+            })
     }
-        // if (fileUploads.current) {
-        //     let formData = new FormData()
-        //     const uploadedFiles = fileUploads.current.files;
-        //     if (formData && uploadedFiles) {
-        //         let filess: (string | Buffer)[] = [];
-        //         for (const file of uploadedFiles) {
-        //             getBase64(file, (res: string) => {
-        //                 let newRes = res.replace(/^data:([A-Za-z-+/]+);base64,/, '');
-        //                 const buff = Buffer.from(newRes, "base64");
+    // if (fileUploads.current) {
+    //     let formData = new FormData()
+    //     const uploadedFiles = fileUploads.current.files;
+    //     if (formData && uploadedFiles) {
+    //         let filess: (string | Buffer)[] = [];
+    //         for (const file of uploadedFiles) {
+    //             getBase64(file, (res: string) => {
+    //                 let newRes = res.replace(/^data:([A-Za-z-+/]+);base64,/, '');
+    //                 const buff = Buffer.from(newRes, "base64");
 
-        //                 const data = buff.toString("utf8");
-        //                 console.log("i am a ", typeof data)
-        //                 filess.push(data)
+    //                 const data = buff.toString("utf8");
+    //                 console.log("i am a ", typeof data)
+    //                 filess.push(data)
 
-        //             })
-        //         }
+    //             })
+    //         }
     //             console.log("base64 files ", filess, files, typeof filess[0]);
     //             // const body = {
     //             //     "name": "emmanuel",
@@ -87,22 +87,22 @@ const Signup = (props: Props) => {
     //             //     method: "post",
     //             //     mode: "cors",
     //             //     body: JSON.stringify(body),
-                    // headers: {
-                    //     'Content-Type': 'application/json',
-                    //     "Accept": "application/json"
-                    // }
+    // headers: {
+    //     'Content-Type': 'application/json',
+    //     "Accept": "application/json"
+    // }
     //             // }).then(res => res.json()).then(data => console.log(data)).catch(e => console.log(e))
-            //     axios.request({
-            //         method: 'POST',
-            //         url: `http://localhost:5000/api/signup`,
-            //         headers: {
-            //             'content-type': 'application/x-www-form-urlencoded'
-            //         },
-            //         data: { files },
+    //     axios.request({
+    //         method: 'POST',
+    //         url: `http://localhost:5000/api/signup`,
+    //         headers: {
+    //             'content-type': 'application/x-www-form-urlencoded'
+    //         },
+    //         data: { files },
 
-            //     }).then(res => console.log(res)).catch(e => console.log(e))
-            //     console.log("upF", uploadedFiles[0])
-            // }
+    //     }).then(res => console.log(res)).catch(e => console.log(e))
+    //     console.log("upF", uploadedFiles[0])
+    // }
     //     }
     //     else {
     //         console.log("type", props.type);
@@ -166,9 +166,9 @@ const Signup = (props: Props) => {
                     />
                 </Form.Group> */}
                 <Form.Group>
-                    <Form.File id="exampleFormControlFile1" label="Example file input" name="image"  multiple onChange={handleChange} />
+                    <Form.File id="exampleFormControlFile1" label="Example file input" name="image" multiple onChange={handleChange} />
                 </Form.Group>
-                <Button className={styles.Submit} value={ctx.userType} type="submit" onClick={handleSubmit}>
+                <Button className={styles.Submit} value={ctx.userType} type="submit" onClick={ctx.handleSignupSubmit}>
                     {ctx.loading ? <p style={{ "display": "flex", "alignItems": "center", "justifyContent": "space-around", "padding": "0 10px" }}>Signing you up...  <Spinner animation="border" variant="primary" /> </p> : "Sign Up"}
                 </Button>
             </Form>

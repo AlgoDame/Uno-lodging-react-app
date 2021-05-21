@@ -8,7 +8,7 @@ const loginvalidation_1 = __importDefault(require("../controllers/loginvalidatio
 const router = express_1.Router();
 const firebaseConfig_1 = require("../firebaseConfig");
 const validateUser = (email, password, data) => {
-    const user = data.filter((item) => item.email === email && item.password === password);
+    const user = data.filter((item) => item.email.toLowerCase() === email.toLowerCase() && item.password === password);
     return {
         status: user.length !== 0,
         data: user[0],

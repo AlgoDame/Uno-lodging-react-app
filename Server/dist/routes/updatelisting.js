@@ -16,7 +16,7 @@ router.put("/:roomId", async function (req, res, next) {
     firebaseConfig_1.db.collection("rooms")
         .doc(id)
         .update(body)
-        .then((res) => console.log("user updated successfully"))
+        .then((res) => console.log("room updated successfully"))
         .catch((err) => console.log(err));
     // }
     // updateUserById('nlkmRw4qQhg32lgX7Gjf',{  name: "emmanuel",age: 27,address: { flatNo: 2, location: "Lagos, NG" }});

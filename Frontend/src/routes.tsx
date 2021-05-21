@@ -14,3 +14,4 @@ export const RoomDetails = lazy(() => import('./Components/RoomDetails/RoomDetai
 export const Signup = lazy(() => import('./Components/Signup/Signup'))
 export const SearchResults = lazy(() => import('./Components/SearchResults/SearchResults'))
 export const RoomsList = lazy(() => import('./Components/RoomsList/RoomsList'))
+export const Favorites = lazy(() => import('./Components/Favorites/Favorites'))
