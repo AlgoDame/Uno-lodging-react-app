@@ -17,4 +17,4 @@ module.exports = multer_1.default({
         cb(null, true);
         // You can always pass an error if something goes wrong:
     }
-}).array("image", 5);
+}).array("files", 5);

@@ -182,6 +182,11 @@
 
             img {
                 height: 100%;
+                 &:before {
+                     display: block;
+                     content: "";
+                     padding: 10px;
+                 }
             }
         }
 
@@ -257,6 +262,12 @@
             @media(min-width: 768px) {
                 height: 100%;
                 order: 0;
+            }
+
+            &:before {
+                display: block;
+                content: "";
+                padding: 10px;
             }
 
         }

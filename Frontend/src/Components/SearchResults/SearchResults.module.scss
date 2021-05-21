@@ -1,5 +1,6 @@
 .Wrapper {
     position: fixed;
+    z-index: 1000;
     top: 80px;
     left: 50%;
     transform: translateX(-50%);

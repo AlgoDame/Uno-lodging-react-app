@@ -1,5 +1,5 @@
-import React, { useContext, Suspense } from 'react';
-import { RoomDetails, Home, RoomsList, Favorites } from "../routes"
+import React, { useContext, Suspense, useLayoutEffect } from 'react';
+import { RoomDetails, Home, RoomsList, Favorites, HostForm } from "../routes"
 import Header from '../Components/Header/Header'
 import Footer from '../Components/Footer/Footer'
 // import Modal from "./Components/Modal/Modal"
@@ -8,33 +8,42 @@ import SearchResults from "../Components/SearchResults/SearchResults"
 import styles from "./Container.module.css"
 import { Switch, Route, withRouter, Redirect } from "react-router-dom"
 import AuthContext from '../store/AuthContext';
+import Spinner from "../Components/Spinner/Spinner"
 interface Props {
     history: any;
 
 }
 
 const Container = (props: Props) => {
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     const ctx = useContext(AuthContext);
 
     return (
         <div className={styles.Wrapper}>
+            {ctx.loading && <Spinner />}
             <Header {...props} />
             <Switch>
                 <Route path="/room/:roomId" render={() =>
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<Spinner />}>
                         <RoomDetails />
                     </Suspense>} />
                 <Route path="/rooms/:location" render={() =>
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<Spinner />}>
                         <RoomsList />
                     </Suspense>} />
                 <Route path="/:username/favorites" render={() =>
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<Spinner />}>
                         <Favorites />
+                    </Suspense>} />
+                <Route path="/host/listroom" render={() =>
+                    <Suspense fallback={<Spinner />}>
+                        <HostForm />
                     </Suspense>} />
                 {/* <Route path="/signup" render={() => <Signup show={show} toggle={toggleModal} isSignup={isSignup} signIn={signIn} signUp={signUp} />} /> */}
                 <Route path="/home" render={() =>
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<Spinner />}>
                         <Home show={ctx.show} hostSignUp={ctx.hostSignUp} />
                     </Suspense>
                 } />

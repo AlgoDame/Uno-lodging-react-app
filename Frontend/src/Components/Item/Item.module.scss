@@ -26,6 +26,12 @@
 
             object-fit: cover;
             border: 1px solid #fff;
+
+            &:before {
+                display: block;
+                content: "";
+                padding: 10px;
+            }
         }
 
         .Overlay {

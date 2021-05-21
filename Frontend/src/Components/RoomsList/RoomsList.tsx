@@ -24,6 +24,7 @@ const RoomsList = () => {
     return (
         <Route path="/rooms/:location">
             <div className={styles.Wrapper}>
+                <h4 style={{ fontSize: "2em", fontWeight: 700 }}>{data.length} room(s) in {location}</h4>
                 {data.map(room => (<ListItem favClick={ctx.handleFavorites} room={room} favorites={ctx.favorites} click={ctx.handleRoomClick} />))}
                 {/* <ListItem /> */}
             </div>

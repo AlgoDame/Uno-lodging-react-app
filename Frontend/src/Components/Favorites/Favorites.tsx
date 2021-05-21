@@ -6,7 +6,7 @@ import ibadan from "../../assets/ibadan.svg";
 import Item from "../Item/Item"
 import ListItem from '../RoomsList/ListItem'
 import styles from "../RoomsList/RoomsList.module.css";
-import classes from "../Home/Home.module.css"
+// import classes from "../Home/Home.module.css"
 interface Props {
 
 }
@@ -17,7 +17,7 @@ const Favorites = (props: Props) => {
     const [favs, setFavs] = useState(ctx.favorites)
     useEffect(() => {
         setFavs(ctx.favorites)
-    }, [ctx.favorites])
+    }, [ctx.favorites, ctx.handleFavorites])
     // const iconClick = (id) => {
     //     setState(!state);
     //     props.favClick(id)

@@ -50,8 +50,10 @@ const RoomDetails = (props: Props) => {
             roomId: data.roomId
         }
         const res = await ctx.submitBooking(body);
-        if (res && res.status === "Successful") setShowModal(true)
+        if (res && res.status === "Successful") setShowModal(true);
         else setResponse(res.message)
+        setTimeout(() => setResponse(""), 2000)
+
     }
     const iconClick = (id) => {
         setState(!state);
@@ -68,7 +70,7 @@ const RoomDetails = (props: Props) => {
 
     console.log(roomId, ctx.userData)
     useEffect(() => {
-        const room = ctx.roomsData.find(room => room.roomId === roomId);
+        const room = ctx.roomsData.find(room => +room.roomId === +roomId);
         if (room) setData(room)
         console.log(roomId, "data is", data)
     }, [ctx.roomsData, data, roomId])
@@ -113,7 +115,7 @@ const RoomDetails = (props: Props) => {
                     <Form.Group controlId="exampleForm.ControlInput1">
                         <Form.Control onChange={handlePhoneChange} value={phone} required type="tel" placeholder="Phone" />
                     </Form.Group>
-                    <Button onClick={handleSubmit} disabled={data.booked} type="submit" variant="dark" block>
+                    <Button onClick={handleSubmit} disabled={data.booked || firstName === "" || lastName === "" || phone === ""} type="submit" variant="dark" block>
                         {ctx.loading ? "Booking..." : data.booked ? "Booked" : "Book Now"}
                     </Button>
                     {response !== undefined && <h5 style={{ "textAlign": "center", "color": "red" }}>{response}</h5>}
