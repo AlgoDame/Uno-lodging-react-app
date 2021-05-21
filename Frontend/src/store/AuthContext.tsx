@@ -93,7 +93,8 @@ const AuthContext = React.createContext({
     handleFavorites: (data) => { },
     favorites: [""],
     updateUser: (a, b, c) => { },
-    submitBooking: (data) => "" as any
+    submitBooking: (data) => "" as any,
+    guestBecomeHost: () => "" as any
 
 });
 
@@ -131,10 +132,15 @@ const AuthContextComp = (props: any) => {
             // const newData = [...data]
             setRoomsData(data);
             console.log("roomsData", roomsData, "data", data)
+            setLoading(false)
         } catch (e) {
             console.log(e)
         }
-        setLoading(false)
+    }
+    const guestBecomeHost = async () => {
+        const res = await updateUser(loggedInUserData.email, "guest", { type: "host" });
+        console.log(res, "I became a user")
+        return res.message
     }
     const fetchUsersData = async () => {
         setLoading(true)
@@ -142,13 +148,13 @@ const AuthContextComp = (props: any) => {
             const res = await axios.get("http://localhost:5000/api/allGuests")
             const { data } = await res;
             setAllUsers(data);
+            setLoading(false)
             return data;
             // const newData = [...data]
             // setRoomsData(data);
         } catch (e) {
             console.log(e)
         }
-        setLoading(false)
     }
     useEffect(() => {
         // const { data } = await
@@ -196,15 +202,23 @@ const AuthContextComp = (props: any) => {
     // }
     const submitBooking = async (data) => {
         // const body = { ...data, bookingDate: new Date() };
-        setLoading(true);
-        const res = await axios.post("http://localhost:5000/api/bookings", data);
-        if (res.data.status === "Successful") {
-            await updateRoom({ booked: true }, data.roomId)
+        if (!loggedIn) {
+            setShow(true);
+            return { message: "You have to be logged in" }
         }
-        console.log(res.data)
-        setLoading(false)
-        return res.data
+        else {
+
+            setLoading(true);
+            const res = await axios.post("http://localhost:5000/api/bookings", data);
+            if (res.data.status === "Successful") {
+                await updateRoom({ booked: true }, data.roomId)
+            }
+            console.log(res.data)
+            setLoading(false)
+            return res.data
+        }
     }
+
     const updateRoom = async (body, id) => {
         try {
             const { data } = await axios.put(`http://localhost:5000/api/updateRoom/${id}`, body);
@@ -310,12 +324,10 @@ const AuthContextComp = (props: any) => {
 
             setShow(false)
             // window.location.reload()
-            console.log("logged in data is", data.data)
             return <Redirect to="/home" />
         } else {
             data.message ? setFormError(data.message) : setFormError(data.status);
             setTimeout(() => setFormError(""), 2000)
-            console.log("login failed")
         }
         console.log(loginType)
         console.log(body)
@@ -334,7 +346,6 @@ const AuthContextComp = (props: any) => {
             setLoggedInUserData(data.data)
             localStorage.setItem("user", JSON.stringify(data.data));
             setShow(false);
-            console.log("sign up successful")
         }
         else {
             data.message ? setFormError(data.message) : setFormError(data.status);
@@ -435,7 +446,8 @@ const AuthContextComp = (props: any) => {
             handleFavorites,
             favorites,
             updateUser,
-            submitBooking
+            submitBooking,
+            guestBecomeHost
         }}>{props.children}</AuthContext.Provider>
     )
 

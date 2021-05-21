@@ -32,15 +32,15 @@ console.log(process.env.API_KEY);
 const router = express_1.Router();
 const app = express_1.default();
 router.post("/", multer_1.default, async (req, res) => {
+    const body = req.body;
     const file = req.files;
-    console.log(typeof file);
     if (file && file.length > 0) {
         const images = file.map(async (eachFile) => {
             const result = await cloudinary_1.default.uploader.upload(eachFile.path);
             console.log("I ran second");
             return result.url;
         });
-        const imageArr = await Promise.all(images);
+        const imageUrl = await Promise.all(images);
         let allRooms = [];
         const error = listroomvalidation_1.default(req.body);
         if (!error) {
@@ -52,8 +52,8 @@ router.post("/", multer_1.default, async (req, res) => {
                 .get()
                 .then((resp) => {
                 allRooms = resp.docs.map((room) => ({ ...room.data() }));
-                let ID = allRooms.length + 1;
-                const body = { ...req.body, imageArr };
+                let ID = Date.now();
+                const body = { ...req.body, imageUrl, roomId: ID, booked: false };
                 firebaseConfig_1.db.collection("rooms")
                     .doc(`${ID}`)
                     .set(body)

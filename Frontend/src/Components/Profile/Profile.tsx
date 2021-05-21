@@ -49,7 +49,12 @@ export const LoggedInProfile = (props: Props) => {
                 <Dropdown.Item className={styles.username}>{props.name}</Dropdown.Item>
                 <Dropdown.Divider />
                 {props.type === "guest" && <><Dropdown.Item onClick={showFavorites}>Favorites</Dropdown.Item>
-                    <Dropdown.Item onClick={props.signUp}>Become a Host</Dropdown.Item></>}
+                    <Dropdown.Item onClick={() => history.push("/host/listroom")}>Become a Host</Dropdown.Item></>}
+                {props.type === "host" && <>
+                    <Dropdown.Item onClick={() => history.push("/host/listroom")}>Add a listing</Dropdown.Item>
+                    <Dropdown.Item onClick={showFavorites}>My Listings</Dropdown.Item>
+                    <Dropdown.Item onClick={props.signUp}>Bookings</Dropdown.Item></>}
+
                 <Dropdown.Item style={{ color: "red" }}
                     onClick={props.logout}>Logout</Dropdown.Item>
             </DropdownButton>

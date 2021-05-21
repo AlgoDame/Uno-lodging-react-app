@@ -12,16 +12,15 @@ const router = Router();
 const app = express();
 
 router.post("/", upload, async (req: Request | any, res) => {
+  const body = req.body;
   const file = req.files;
-  console.log(typeof file);
-
   if (file && file.length > 0) {
     const images = file.map(async (eachFile: any) => {
       const result = await cloudinary.uploader.upload(eachFile.path);
       console.log("I ran second");
       return result.url;
     });
-    const imageArr = await Promise.all(images);
+    const imageUrl = await Promise.all(images);
     let allRooms: Record<string, any>[] = [];
     const error = validateRoomListing(req.body);
     if (!error) {
@@ -32,8 +31,8 @@ router.post("/", upload, async (req: Request | any, res) => {
         .get()
         .then((resp) => {
           allRooms = resp.docs.map((room) => ({ ...room.data() }));
-          let ID: number = allRooms.length + 1;
-          const body = { ...req.body, imageArr };
+          let ID: number = Date.now();
+          const body = { ...req.body, imageUrl, roomId: ID, booked: false };
           db.collection("rooms")
             .doc(`${ID}`)
             .set(body)

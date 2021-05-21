@@ -40,6 +40,12 @@
   border: 1px solid #fff;
 }
 
+.Item > .imgWrapper > img:before {
+  display: block;
+  content: "";
+  padding: 10px;
+}
+
 .Item > .imgWrapper .Overlay {
   position: absolute;
   width: 100%;

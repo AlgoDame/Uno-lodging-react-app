@@ -180,6 +180,11 @@
   .Home .hostBg img {
     height: 100%;
   }
+  .Home .hostBg img:before {
+    display: block;
+    content: "";
+    padding: 10px;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -274,6 +279,12 @@
         -ms-flex-order: 0;
             order: 0;
   }
+}
+
+.Home .hostBg img:before {
+  display: block;
+  content: "";
+  padding: 10px;
 }
 
 .Home .Explore {

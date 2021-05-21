@@ -5,17 +5,9 @@ const ParticleBg = () => {
   return (
     <Particles
       params={ParticleConfig}
-      style={{ position: "absolute", zIndex: "200" }}
+      style={{ position: "absolute", zIndex: "200", left: "0", top: "0" }}
       height="90vh"
       width="100vw"
-      // styles={{
-      //   height: "100%",
-      //   minWidth: "100vw",
-      //   zIndex: "10000",
-      //   position: "absolute",
-      //   top: "0",
-      //   left: "0",
-      // }}
     ></Particles>
   );
 };
