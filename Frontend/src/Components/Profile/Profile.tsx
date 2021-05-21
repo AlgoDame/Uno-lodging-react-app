@@ -2,26 +2,29 @@ import React from 'react'
 import styles from "./Profile.module.css"
 import { CgProfile } from "react-icons/cg"
 // import { IoMdArrowDropdown } from "react-icons/io"
-import { NavLink } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 
 interface Props {
-    signIn: () => void
-    signUp: () => void,
+    signIn?: () => void
+    signUp?: () => void,
     loggedIn: boolean,
     logout: () => void,
     route?: string,
-    name: string
+    type?: string;
+    name: string;
 }
 
 export const MobileProfile = (props: Props) => {
+
+
     return (
         <div className={styles.Profile}>
             {/* <div className={styles.Dropdown}> */}
             <DropdownButton className={styles.dropdownBtn} id="dropdown-basic-button" title={<i><CgProfile /></i>}>
-                <Dropdown.Item><NavLink to="">Become a Host</NavLink></Dropdown.Item>
-                <Dropdown.Item onClick={props.signIn}><NavLink to="" >Login</NavLink></Dropdown.Item>
-                <Dropdown.Item onClick={props.signUp}><NavLink to="" >Sign up</NavLink></Dropdown.Item>
+                <Dropdown.Item>Become a Host</Dropdown.Item>
+                <Dropdown.Item onClick={props.signIn}>Login</Dropdown.Item>
+                <Dropdown.Item onClick={props.signUp}>Sign up</Dropdown.Item>
             </DropdownButton>
 
             {/* </div> */}
@@ -29,6 +32,10 @@ export const MobileProfile = (props: Props) => {
     )
 }
 export const LoggedInProfile = (props: Props) => {
+    const history = useHistory();
+    const showFavorites = () => {
+        history.push(`/${props.name}/favorites`)
+    }
     let style;
     if (props.route !== "/home") {
         style = {
@@ -41,9 +48,10 @@ export const LoggedInProfile = (props: Props) => {
             <DropdownButton className={styles.dropdownBtn} id="dropdown-basic-button" title={<i style={style}><CgProfile /></i>}>
                 <Dropdown.Item className={styles.username}>{props.name}</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item><NavLink to="">Profile</NavLink></Dropdown.Item>
-                <Dropdown.Item onClick={props.signIn}><NavLink to="">Become a Host</NavLink></Dropdown.Item>
-                <Dropdown.Item onClick={props.logout}><NavLink to="" >Logout</NavLink></Dropdown.Item>
+                {props.type === "guest" && <><Dropdown.Item onClick={showFavorites}>Favorites</Dropdown.Item>
+                    <Dropdown.Item onClick={props.signUp}>Become a Host</Dropdown.Item></>}
+                <Dropdown.Item style={{ color: "red" }}
+                    onClick={props.logout}>Logout</Dropdown.Item>
             </DropdownButton>
 
             {/* </div> */}

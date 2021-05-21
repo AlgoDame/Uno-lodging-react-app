@@ -1,6 +1,7 @@
 .Wrapper {
   margin-top: 80px;
   padding: 30px;
+  min-height: 60vh;
 }
 
 .Wrapper .ListItem {
@@ -48,6 +49,21 @@
 
 .Wrapper .ListItem .details h3 {
   font-size: 1.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.Wrapper .ListItem .details h3 i {
+  margin-left: 20px;
+  font-size: 2.7rem;
+  cursor: pointer;
 }
 
 .Wrapper .ListItem .details > span {
@@ -181,5 +197,41 @@
             flex: 2;
     padding: 0 30px;
     height: 100%;
+  }
+}
+
+@media (min-width: 678px) {
+  .Wrapper .Explore {
+    padding: 50px 0;
+  }
+}
+
+.Wrapper .Explore h2 {
+  text-transform: uppercase;
+  padding: 20px 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.Wrapper .Explore .Items {
+  display: -ms-grid;
+  display: grid;
+  place-content: center;
+  place-items: center !important;
+  grid-gap: 30px;
+}
+
+@media (min-width: 678px) {
+  .Wrapper .Explore .Items {
+    -ms-grid-columns: (minmax(270px, 1fr))[auto-fit];
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  }
+}
+
+@media (min-width: 978px) {
+  .Wrapper .Explore .Items {
+    -ms-grid-columns: (minmax(250px, 1fr))[auto-fit2];
+        grid-template-columns: repeat(auto-fit2, minmax(250px, 1fr));
   }
 }

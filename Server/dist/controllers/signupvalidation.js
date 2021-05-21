@@ -12,6 +12,7 @@ function validateSignup(requestBody) {
         email: joi_1.default.string().email().required(),
         password: joi_1.default.string().min(7).required(),
         type: joi_1.default.string().required(),
+        favorites: joi_1.default.array()
     };
     const result = joi_1.default.validate(requestBody, schema);
     if (result.error) {

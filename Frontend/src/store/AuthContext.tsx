@@ -8,7 +8,8 @@ const initialData = {
     firstName: "",
     lastName: "",
     phone: "",
-    type: ""
+    type: "",
+    favorites: ['']
 }
 export interface RoomData {
     hostid: string;
@@ -89,6 +90,10 @@ const AuthContext = React.createContext({
     },
     handleRoomClick: (data) => { },
     formError: "",
+    handleFavorites: (data) => { },
+    favorites: [""],
+    updateUser: (a, b, c) => { },
+    submitBooking: (data) => "" as any
 
 });
 
@@ -96,7 +101,7 @@ const AuthContextComp = (props: any) => {
 
     // const [files, setFiles] = useState<(string | Buffer)[]>([]);
     const [userData, setUserData] = useState(initialData)
-    // const [allUsers, setAllUsers] = useState([])
+    const [allUsers, setAllUsers] = useState([initialData])
     const [roomShown, setRoomShown] = useState({} as RoomData)
     const [roomsData, setRoomsData] = useState<RoomData[]>([])
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
@@ -110,6 +115,7 @@ const AuthContextComp = (props: any) => {
     const [loggedIn, setLoggedIn] = useState(false)
     const [loggedInUserData, setLoggedInUserData] = useState(initialData)
     const [formError, setFormError] = useState("");
+    const [favorites, setFavorites] = useState([] as string[])
 
     useEffect(() => {
         setUserData(initialData);
@@ -135,7 +141,8 @@ const AuthContextComp = (props: any) => {
         try {
             const res = await axios.get("http://localhost:5000/api/allGuests")
             const { data } = await res;
-            return data
+            setAllUsers(data);
+            return data;
             // const newData = [...data]
             // setRoomsData(data);
         } catch (e) {
@@ -146,18 +153,24 @@ const AuthContextComp = (props: any) => {
     useEffect(() => {
         // const { data } = await
         fetchRoomsData();
-        fetchUsersData()
+        fetchUsersData();
     }, [])
     useEffect(() => {
         const loggedInUser = localStorage.getItem("user");
         if (loggedInUser) {
             const foundUser = JSON.parse(loggedInUser);
-            setLoggedInUserData(foundUser);
-            setLoggedIn(true)
+            const updatedUser = allUsers.find(user => user.email === foundUser.email);
+            if (updatedUser) {
+                localStorage.setItem("user", JSON.stringify(updatedUser))
+                setLoggedInUserData(updatedUser);
+                setFavorites(updatedUser.favorites)
+                setLoggedIn(true)
+            }
+            console.log(updatedUser, "updated user")
         }
-        console.log("data", loggedInUserData)
+        console.log("data", allUsers)
         console.log("userData", userData)
-    }, [])
+    }, [allUsers, favorites])
 
     const handleSearchResults = (e: ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
@@ -171,6 +184,8 @@ const AuthContextComp = (props: any) => {
 
 
     }
+
+
     // const validateEmail = (email: string) => {
     //     const testRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
     //     return testRegex.test(email)
@@ -179,6 +194,27 @@ const AuthContextComp = (props: any) => {
     //     let numReg = /[0-9]/g
     //     return password.trim().length >= 7 && numReg.test(password)
     // }
+    const submitBooking = async (data) => {
+        // const body = { ...data, bookingDate: new Date() };
+        setLoading(true);
+        const res = await axios.post("http://localhost:5000/api/bookings", data);
+        if (res.data.status === "Successful") {
+            await updateRoom({ booked: true }, data.roomId)
+        }
+        console.log(res.data)
+        setLoading(false)
+        return res.data
+    }
+    const updateRoom = async (body, id) => {
+        try {
+            const { data } = await axios.put(`http://localhost:5000/api/updateRoom/${id}`, body);
+            return data
+        }
+        catch (e) {
+            return e.message
+        }
+    }
+
     const handleRoomClick = (title: string) => {
         // return (e: MouseEventHandler<HTMLDivElement>) => {
         //This should later be handled with a unique room id
@@ -190,6 +226,27 @@ const AuthContextComp = (props: any) => {
         };
         console.log(title, room)
         // }
+    }
+    const handleFavorites = (id: string) => {
+        let currFavorites = favorites;
+        if (currFavorites.includes(id)) {
+            currFavorites.splice(currFavorites.indexOf(id), 1)
+        }
+        else { currFavorites.push(id); }
+        setFavorites(currFavorites)
+        const body = { favorites: currFavorites }
+        const res = updateUser(loggedInUserData.email, "guest", body)
+        console.log("I updated", res);
+        console.log(favorites)
+    }
+
+    const updateUser = async (id: string, type: string, data) => {
+        try {
+            const res = await axios.put(`http://localhost:5000/api/user/${id}?type=${type}`, data);
+            return res.data
+        } catch (e) {
+            console.log(e.message)
+        }
     }
     const status = (validationType: string) => {
         switch (validationType) {
@@ -270,13 +327,14 @@ const AuthContextComp = (props: any) => {
         if (emailStatus !== "" || passwordStatus !== "") {
             console.log(emailStatus, passwordStatus)
         }
-        const body = { ...userData, type: userType }
+        const body = { ...userData, type: userType, favorites: [] }
         const data = await validateSignup(body)
         if (data.status === "Successful") {
             setLoggedIn(true)
             setLoggedInUserData(data.data)
             localStorage.setItem("user", JSON.stringify(data.data));
-            setShow(false)
+            setShow(false);
+            console.log("sign up successful")
         }
         else {
             data.message ? setFormError(data.message) : setFormError(data.status);
@@ -304,7 +362,7 @@ const AuthContextComp = (props: any) => {
         // props.history.push("/")
         window.location.reload()
     }
-    const validateSignup = async (body: { type: any; email: string; password: string; firstName: string; lastName: string; phone: string; }) => {
+    const validateSignup = async (body: { favorites: string[]; type: any; email: string; password: string; firstName: string; lastName: string; phone: string; }) => {
         setLoading(true)
         try {
             const { data } = await axios.post("http://localhost:5000/api/signup", body, { headers: { 'content-type': "application/json" } })
@@ -373,7 +431,11 @@ const AuthContextComp = (props: any) => {
             logout,
             roomShown,
             handleRoomClick,
-            formError
+            formError,
+            handleFavorites,
+            favorites,
+            updateUser,
+            submitBooking
         }}>{props.children}</AuthContext.Provider>
     )
 

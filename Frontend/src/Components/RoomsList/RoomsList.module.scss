@@ -1,6 +1,7 @@
 .Wrapper {
     margin-top: 80px;
     padding: 30px;
+    min-height: 60vh;
 
     .ListItem {
         display: flex;
@@ -35,6 +36,19 @@
 
             h3 {
                 font-size: 1.2rem;
+                display: flex;
+                justify-content: space-between;
+
+                align-items: baseline;
+
+                i {
+                    margin-left: 20px;
+                    font-size: 2.7rem;
+                    cursor: pointer;
+
+                    // * {
+                    // }
+                }
             }
 
             >span {
@@ -209,4 +223,40 @@
             }
         }
     }
+
+    .Explore {
+        // padding: 30px;
+
+        @media (min-width: 678px) {
+            padding: 50px 0
+        }
+
+        h2 {
+            text-transform: uppercase;
+            padding: 20px 0;
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: 1px
+        }
+
+        .Items {
+            display: grid;
+            place-content: center;
+            place-items: center !important;
+            // padding: 20px;
+            // grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-gap: 30px;
+
+            @media(min-width: 678px) {
+                // padding: 30px;
+                grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            }
+
+            @media (min-width: 978px) {
+                grid-template-columns: repeat(auto-fit2, minmax(250px, 1fr));
+                // grid-gap: 50px;
+            }
+        }
+    }
+
 }

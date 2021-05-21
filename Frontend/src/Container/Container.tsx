@@ -1,5 +1,5 @@
 import React, { useContext, Suspense } from 'react';
-import { RoomDetails, Home, RoomsList } from "../routes"
+import { RoomDetails, Home, RoomsList, Favorites } from "../routes"
 import Header from '../Components/Header/Header'
 import Footer from '../Components/Footer/Footer'
 // import Modal from "./Components/Modal/Modal"
@@ -18,7 +18,7 @@ const Container = (props: Props) => {
 
     return (
         <div className={styles.Wrapper}>
-            <Header />
+            <Header {...props} />
             <Switch>
                 <Route path="/room/:roomId" render={() =>
                     <Suspense fallback={<div>Loading...</div>}>
@@ -27,6 +27,10 @@ const Container = (props: Props) => {
                 <Route path="/rooms/:location" render={() =>
                     <Suspense fallback={<div>Loading...</div>}>
                         <RoomsList />
+                    </Suspense>} />
+                <Route path="/:username/favorites" render={() =>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Favorites />
                     </Suspense>} />
                 {/* <Route path="/signup" render={() => <Signup show={show} toggle={toggleModal} isSignup={isSignup} signIn={signIn} signUp={signUp} />} /> */}
                 <Route path="/home" render={() =>

@@ -14,12 +14,18 @@ router.post('/', (req, res, next) => {
         return res.status(400).end();
     }
     else {
+        const id = req.body.hostid;
+        const body = { ...req.body, bookingDate: new Date() };
         firebaseConfig_1.db.collection("bookings")
-            .get()
+            .doc(`${id}`)
+            .set(body)
             .then((resp) => {
-            let bookings = resp.docs.map((booking) => ({ ...booking.data() }));
             return res.status(200)
-                .json({ status: "Successful", message: bookings });
+                .json({ status: "Successful", message: `room ${req.body.roomId} booked successfully` });
+        })
+            .catch(e => {
+            res.json({ status: "error", message: e });
+            return res.status(400).end();
         });
     }
 });

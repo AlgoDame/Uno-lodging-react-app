@@ -8,8 +8,12 @@ import img3 from "../../assets/img3.svg"
 import img2 from "../../assets/img2.svg"
 import bg4 from "../../assets/homeBg4.svg"
 import hostBg from "../../assets/hostBg.svg";
+import lagos from "../../assets/lagos.svg";
+import abuja from "../../assets/abuja.svg";
+import ibadan from "../../assets/ibadan.svg";
 import Item from "../Item/Item"
 import About from "../About/About"
+import ParticleBg from "./ParticlesBg.jsx"
 interface Props {
     show: boolean;
     hostSignUp: () => void
@@ -18,6 +22,7 @@ interface Props {
 const Home = (props: Props) => {
     return (
         <div className={styles.Home}>
+            <ParticleBg />
             <section className={styles.Hero}>
                 <div className={styles.Hero_Text}>
                     <h1>
@@ -76,10 +81,10 @@ const Home = (props: Props) => {
             <section className={styles.Explore}>
                 <h2>Explore Popular Locations</h2>
                 <div className={styles.Items}>
-                    <Item title="Lagos" image={bg2} hover={true} />
-                    <Item title="Abuja" image={bg3} hover={true} />
+                    <Item title="Lagos" image={lagos} hover={true} />
+                    <Item title="Abuja" image={abuja} hover={true} />
                     <Item title="Portharcourt" image={img3} hover={true} />
-                    <Item title="Ibadan" image={img2} hover={true} />
+                    <Item title="Ibadan" image={ibadan} hover={true} />
                 </div>
             </section>
         </div>

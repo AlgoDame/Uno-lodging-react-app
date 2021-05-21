@@ -5,14 +5,15 @@ import AuthContext from "../../store/AuthContext"
 
 interface Props {
     title: "",
-    location: ""
+    location: "",
+    imageUrl: ''
 }
 
 const SearchResult = (props: Props) => {
     const ctx = useContext(AuthContext);
     return (
         <div className={styles.Result} onClick={() => ctx.handleRoomClick(props.title)}>
-            <img src={bg2} alt="" />
+            <img src={props.imageUrl[0]} alt="" />
             <div>
                 <h3>{props.title}</h3>
                 <p>{props.location}</p>

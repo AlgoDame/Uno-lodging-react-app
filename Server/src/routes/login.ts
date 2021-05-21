@@ -9,7 +9,7 @@ interface Data {
 
 const validateUser = (email: string, password: string, data: Data[]) => {
   const user = data.filter(
-    (item: Data) => item.email === email && item.password === password
+    (item: Data) => item.email.toLowerCase() === email.toLowerCase() && item.password === password
   );
   return {
     status: user.length !== 0,

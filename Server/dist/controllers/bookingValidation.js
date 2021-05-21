@@ -6,11 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const joi_1 = __importDefault(require("joi"));
 function validateRoomBooking(requestBody) {
     const schema = {
-        hostId: joi_1.default.string().required(),
-        roomId: joi_1.default.string().required(),
+        hostid: joi_1.default.string(),
+        roomId: joi_1.default.string(),
         name: joi_1.default.string().required(),
         phone: joi_1.default.number().required(),
-        date: joi_1.default.string().required(),
     };
     const result = joi_1.default.validate(requestBody, schema);
     if (result.error) {

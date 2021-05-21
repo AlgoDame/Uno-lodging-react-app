@@ -19,7 +19,7 @@ router.put(
     db.collection("rooms")
       .doc(id)
       .update(body)
-      .then((res) => console.log("user updated successfully"))
+      .then((res) => console.log("room updated successfully"))
       .catch((err) => console.log(err));
     // }
 

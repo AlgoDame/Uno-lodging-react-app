@@ -24,7 +24,7 @@ const RoomsList = () => {
     return (
         <Route path="/rooms/:location">
             <div className={styles.Wrapper}>
-                {data.map(room => (<ListItem imageUrl={room.imageUrl} key={room.roomId} features={room.features} click={ctx.handleRoomClick} title={room.title} price={room.price} location={room.location} hostName={room.hostname} />))}
+                {data.map(room => (<ListItem favClick={ctx.handleFavorites} room={room} favorites={ctx.favorites} click={ctx.handleRoomClick} />))}
                 {/* <ListItem /> */}
             </div>
         </Route>

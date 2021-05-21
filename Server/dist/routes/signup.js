@@ -15,16 +15,25 @@ router.post("/", function (req, res, next) {
         return res.status(400).end();
     }
     const addUser = (category) => {
+        let allUsers = [];
         firebaseConfig_1.db.collection(category)
-            .add(req.body)
+            .get()
             .then((resp) => {
-            return res
-                .status(201)
-                .json({ status: "Successful", data: req.body, resp });
-        })
-            .catch((err) => {
-            res.json({ err });
-            return res.status(400).end();
+            allUsers = resp.docs.map((user) => ({ ...user.data() }));
+            let ID = req.body.email;
+            const body = { ...req.body, allUsers };
+            firebaseConfig_1.db.collection(category)
+                .doc(`${ID}`)
+                .set(body)
+                .then((resp) => {
+                return res
+                    .status(201)
+                    .json({ status: "Successful", data: req.body, resp });
+            })
+                .catch((err) => {
+                res.json({ err });
+                return res.status(400).end();
+            });
         });
     };
     switch (type) {
@@ -33,7 +42,7 @@ router.post("/", function (req, res, next) {
                 .get()
                 .then((resp) => {
                 const hosts = resp.docs.map((doc) => ({ ...doc.data() }));
-                if (!hosts.find((host) => host.email === email)) {
+                if (!hosts.find((host) => host.email.toLowerCase() === email.toLowerCase())) {
                     addUser("hosts");
                 }
                 else {

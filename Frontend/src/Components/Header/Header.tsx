@@ -32,14 +32,14 @@ const Header = (props: Props) => {
             </NavLink>
             <SearchBar handleSearch={ctx.handleSearchResults} placeholder="Find a room by location" />
             <div className={styles.Links}>
-                {ctx.loggedIn ? (<div className={styles.lgIn}><LoggedInProfile name={ctx.userData.firstName} route={ctx.route} logout={ctx.logout} loggedIn={ctx.loggedIn} signIn={ctx.signIn} signUp={ctx.guestSignUp} /> </div>) : (<>
+                {ctx.loggedIn ? (<div className={styles.lgIn}><LoggedInProfile type={ctx.userData.type}{...props} name={ctx.userData.firstName} route={ctx.route} logout={ctx.logout} loggedIn={ctx.loggedIn} /> </div>) : (<>
                     <button onClick={ctx.hostSignUp}>Become a host</button>
                     <button onClick={ctx.guestSignUp}>Sign up</button>
                     <button onClick={ctx.signIn}>Login</button>
                 </>)}
             </div>
             <div className={styles.Dropdown}>
-                {!ctx.loggedIn ? <MobileProfile name={ctx.userData.firstName} logout={ctx.logout} loggedIn={ctx.loggedIn} signIn={ctx.signIn} signUp={ctx.guestSignUp} /> : <LoggedInProfile name={ctx.userData.firstName} route={ctx.route} logout={ctx.logout} loggedIn={ctx.loggedIn} signIn={ctx.signIn} signUp={ctx.guestSignUp} />}
+                {!ctx.loggedIn ? <MobileProfile name={ctx.userData.firstName} logout={ctx.logout} loggedIn={ctx.loggedIn} signIn={ctx.signIn} signUp={ctx.guestSignUp} /> : <LoggedInProfile  {...props} name={ctx.userData.firstName} route={ctx.route} logout={ctx.logout} loggedIn={ctx.loggedIn} type={ctx.userData.type} />}
             </div>
 
         </nav>
