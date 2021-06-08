@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, ChangeEvent, MouseEvent } from "react";
 import axios from "axios"
-import { withRouter, Redirect } from "react-router-dom"
+import { withRouter, useHistory } from "react-router-dom"
 const initialData = {
     email: "",
     password: "",
@@ -99,7 +99,7 @@ const AuthContext = React.createContext({
 });
 
 const AuthContextComp = (props: any) => {
-
+    const history = useHistory()
     // const [files, setFiles] = useState<(string | Buffer)[]>([]);
     const [userData, setUserData] = useState(initialData)
     const [allUsers, setAllUsers] = useState([initialData])
@@ -116,7 +116,8 @@ const AuthContextComp = (props: any) => {
     const [loggedIn, setLoggedIn] = useState(false)
     const [loggedInUserData, setLoggedInUserData] = useState(initialData)
     const [formError, setFormError] = useState("");
-    const [favorites, setFavorites] = useState([] as string[])
+    const [favorites, setFavorites] = useState([] as string[]);
+    // const [bookings, setBookings] = useState([])
 
     useEffect(() => {
         setUserData(initialData);
@@ -127,7 +128,7 @@ const AuthContextComp = (props: any) => {
     const fetchRoomsData = async () => {
         setLoading(true)
         try {
-            const res = await axios.get("http://localhost:5000/api/rooms")
+            const res = await axios.get("https://fierce-plains-40745.herokuapp.com/api/rooms")
             const { data } = await res;
             // const newData = [...data]
             setRoomsData(data);
@@ -140,21 +141,32 @@ const AuthContextComp = (props: any) => {
     const guestBecomeHost = async () => {
         const res = await updateUser(loggedInUserData.email, "guest", { type: "host" });
         console.log(res, "I became a user")
-        return res.message
+        const updUser = {
+            ...loggedInUserData, type: "host"
+        }
+        localStorage.setItem("user", JSON.stringify(updUser))
+        return res.status;
     }
+
+    // const fetchBookings = async () => {
+    //     setLoading(true)
+    //     try {
+    //         const res = await axios.get("http")
+    //     }
+    // }
     const fetchUsersData = async () => {
         setLoading(true)
         try {
-            const res = await axios.get("http://localhost:5000/api/allGuests")
+            const res = await axios.get("https://fierce-plains-40745.herokuapp.com/api/allGuests")
             const { data } = await res;
             setAllUsers(data);
-            setLoading(false)
             return data;
             // const newData = [...data]
             // setRoomsData(data);
         } catch (e) {
             console.log(e)
         }
+        setLoading(false)
     }
     useEffect(() => {
         // const { data } = await
@@ -165,7 +177,7 @@ const AuthContextComp = (props: any) => {
         const loggedInUser = localStorage.getItem("user");
         if (loggedInUser) {
             const foundUser = JSON.parse(loggedInUser);
-            const updatedUser = allUsers.find(user => user.email === foundUser.email);
+            const updatedUser = allUsers.find(user => user.email === foundUser.email && user.type === foundUser.type);
             if (updatedUser) {
                 localStorage.setItem("user", JSON.stringify(updatedUser))
                 setLoggedInUserData(updatedUser);
@@ -209,7 +221,7 @@ const AuthContextComp = (props: any) => {
         else {
 
             setLoading(true);
-            const res = await axios.post("http://localhost:5000/api/bookings", data);
+            const res = await axios.post("https://fierce-plains-40745.herokuapp.com/api/bookings", data);
             if (res.data.status === "Successful") {
                 await updateRoom({ booked: true }, data.roomId)
             }
@@ -221,7 +233,7 @@ const AuthContextComp = (props: any) => {
 
     const updateRoom = async (body, id) => {
         try {
-            const { data } = await axios.put(`http://localhost:5000/api/updateRoom/${id}`, body);
+            const { data } = await axios.put(`https://fierce-plains-40745.herokuapp.com/api/updateRoom/${id}`, body);
             return data
         }
         catch (e) {
@@ -242,6 +254,9 @@ const AuthContextComp = (props: any) => {
         // }
     }
     const handleFavorites = (id: string) => {
+        if (!loggedIn) {
+            return alert("You have to be logged in")
+        }
         let currFavorites = favorites;
         if (currFavorites.includes(id)) {
             currFavorites.splice(currFavorites.indexOf(id), 1)
@@ -256,7 +271,7 @@ const AuthContextComp = (props: any) => {
 
     const updateUser = async (id: string, type: string, data) => {
         try {
-            const res = await axios.put(`http://localhost:5000/api/user/${id}?type=${type}`, data);
+            const res = await axios.put(`https://fierce-plains-40745.herokuapp.com/api/user/${id}?type=${type}`, data);
             return res.data
         } catch (e) {
             console.log(e.message)
@@ -324,7 +339,7 @@ const AuthContextComp = (props: any) => {
 
             setShow(false)
             // window.location.reload()
-            return <Redirect to="/home" />
+            history.replace("/")
         } else {
             data.message ? setFormError(data.message) : setFormError(data.status);
             setTimeout(() => setFormError(""), 2000)
@@ -346,6 +361,7 @@ const AuthContextComp = (props: any) => {
             setLoggedInUserData(data.data)
             localStorage.setItem("user", JSON.stringify(data.data));
             setShow(false);
+            if (userType === "host") history.replace("/host/listroom")
         }
         else {
             data.message ? setFormError(data.message) : setFormError(data.status);
@@ -357,7 +373,7 @@ const AuthContextComp = (props: any) => {
     const validateLogin = async (body: { email: string; password: string; type: string; }) => {
         setLoading(true)
         try {
-            const { data } = await axios.post("http://localhost:5000/api/login", body, { headers: { 'content-type': "application/json" } })
+            const { data } = await axios.post("https://fierce-plains-40745.herokuapp.com/api/login", body, { headers: { 'content-type': "application/json" } })
             console.log(data)
             return data
         }
@@ -371,12 +387,12 @@ const AuthContextComp = (props: any) => {
         localStorage.removeItem("user");
         setLoggedIn(false);
         // props.history.push("/")
-        window.location.reload()
+        history.replace("/")
     }
     const validateSignup = async (body: { favorites: string[]; type: any; email: string; password: string; firstName: string; lastName: string; phone: string; }) => {
         setLoading(true)
         try {
-            const { data } = await axios.post("http://localhost:5000/api/signup", body, { headers: { 'content-type': "application/json" } })
+            const { data } = await axios.post("https://fierce-plains-40745.herokuapp.com/api/signup", body, { headers: { 'content-type': "application/json" } })
             console.log(data)
             return data
         }

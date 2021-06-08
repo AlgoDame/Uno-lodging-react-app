@@ -23,10 +23,10 @@
 
 .Main .Content img {
   max-width: 100%;
-  height: auto;
   -o-object-fit: cover;
      object-fit: cover;
   margin: 0 auto;
+  max-height: 400px !important;
 }
 
 .Main .Content {

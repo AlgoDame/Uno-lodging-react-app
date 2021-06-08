@@ -46,7 +46,7 @@ app.use('/api/rooms', allRoomsRouter);
 app.use('/api/host/listing', listRoomRouter);
 app.use('/api/admin/users', admin);
 app.use('/api/updateRoom', updateListingRouter);
-app.use('/api/delete/id', deleteRoomRouter);
+app.use('/api/delete', deleteRoomRouter);
 app.use('/api/getAllHosts', allHostRouter);
 app.use('/api/allGuests', allGuests);
 app.use('/api/bookings', roomBooking);

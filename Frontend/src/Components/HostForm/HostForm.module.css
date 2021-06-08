@@ -5,22 +5,69 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 50px;
+  padding: 20px;
+  height: 100%;
+  margin-top: 80px;
+}
+
+.Main .hero {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 100% !important;
+  background-color: #111;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.Main .hero img {
+  width: 100%;
+}
+
+.Main h3 {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  font-weight: 800px;
+  text-align: center;
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+.Main button {
+  height: 50px;
+  margin-top: 20px;
 }
 
 .Main .Form {
-  max-width: 550px;
-  width: 100%;
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+  width: 90%;
+  max-width: 700px;
   margin: 0 auto;
+  padding: 50px;
   background-color: #fff;
   position: -webkit-sticky;
   position: sticky;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   top: 0;
   right: 0;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
 }
 
 .Main .Form input,
@@ -34,7 +81,7 @@
   .Main .Form input,
   .Main .Form button,
   .Main .Form .form-control-file {
-    height: 60px !important;
+    height: 40px !important;
   }
 }
 
@@ -51,8 +98,8 @@
 
 @media (min-width: 978px) {
   .Main {
-    margin-top: 100px;
     max-width: 100%;
+    height: 100%;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
@@ -61,21 +108,5 @@
         -ms-flex-align: start;
             align-items: start;
     padding: 50px;
-  }
-  .Main .Content {
-    padding: 0 20px;
-  }
-  .Main .Content > *:not(img) {
-    padding: 0 0;
-  }
-  .Main .Content h2 {
-    font-size: 1.5rem;
-  }
-  .Main .Content p {
-    font-size: 1.2rem;
-    line-height: 1.8;
-  }
-  .Main .Content h6 {
-    font-size: 1rem;
   }
 }

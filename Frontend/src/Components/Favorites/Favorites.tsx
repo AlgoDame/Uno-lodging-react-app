@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useLayoutEffect } from "react";
 import AuthContext from "../../store/AuthContext"
 import lagos from "../../assets/lagos.svg";
 import abuja from "../../assets/abuja.svg";
@@ -12,6 +12,9 @@ interface Props {
 }
 
 const Favorites = (props: Props) => {
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     const ctx = useContext(AuthContext);
     // const [state, setState] = useState(false);
     const [favs, setFavs] = useState(ctx.favorites)

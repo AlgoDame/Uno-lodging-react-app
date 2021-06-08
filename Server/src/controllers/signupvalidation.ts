@@ -10,6 +10,7 @@ function validateSignup(requestBody: Record<string, any>) {
     type: Joi.string().required(),
     favorites: Joi.array()
   };
+
   const result = Joi.validate(requestBody, schema);
   if (result.error) {
     return result.error.details[0].message;
@@ -17,4 +18,5 @@ function validateSignup(requestBody: Record<string, any>) {
     return null;
   }
 }
+
 export default validateSignup;

@@ -52,7 +52,7 @@ router.post("/", multer_1.default, async (req, res) => {
                 .get()
                 .then((resp) => {
                 allRooms = resp.docs.map((room) => ({ ...room.data() }));
-                let ID = Date.now();
+                let ID = Date.now().toString();
                 const body = { ...req.body, imageUrl, roomId: ID, booked: false };
                 firebaseConfig_1.db.collection("rooms")
                     .doc(`${ID}`)

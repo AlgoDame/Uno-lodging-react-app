@@ -91,13 +91,20 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: #fff;
+  background-color: #ccc;
+  position: relative;
+  top: 0;
+  left: 0;
 }
 
 .Loader img {
@@ -124,7 +131,11 @@
   0% {
     opacity: 1;
   }
-  50% {
+  5% {
+  }
+  10% {
+  }
+  20% {
     opacity: 0.5;
     border-color: #5bc28d;
   }

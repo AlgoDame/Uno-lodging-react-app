@@ -1,5 +1,5 @@
 import React, { useContext, Suspense, useLayoutEffect } from 'react';
-import { RoomDetails, Home, RoomsList, Favorites, HostForm } from "../routes"
+import { RoomDetails, Home, RoomsList, Favorites, HostForm, Listings } from "../routes"
 import Header from '../Components/Header/Header'
 import Footer from '../Components/Footer/Footer'
 // import Modal from "./Components/Modal/Modal"
@@ -33,10 +33,14 @@ const Container = (props: Props) => {
                     <Suspense fallback={<Spinner />}>
                         <RoomsList />
                     </Suspense>} />
-                <Route path="/:username/favorites" render={() =>
+                {ctx.loggedIn && <Route path="/:username/favorites" render={() =>
                     <Suspense fallback={<Spinner />}>
                         <Favorites />
-                    </Suspense>} />
+                    </Suspense>} />}
+                {ctx.userData.type === "host" && <Route path="/:username/listings" render={() =>
+                    <Suspense fallback={<Spinner />}>
+                        <Listings />
+                    </Suspense>} />}
                 <Route path="/host/listroom" render={() =>
                     <Suspense fallback={<Spinner />}>
                         <HostForm />

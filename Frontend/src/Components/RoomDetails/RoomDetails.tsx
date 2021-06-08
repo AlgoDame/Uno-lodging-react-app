@@ -1,6 +1,4 @@
 import { useContext, useEffect, useState } from "react"
-import img1 from "../../assets/homeBg1.svg"
-import img2 from "../../assets/homeBg2.svg"
 import { FcLike, FcLikePlaceholder } from "react-icons/fc"
 import styles from "./RoomDetails.module.css"
 import { Carousel, Form, Button } from "react-bootstrap"
@@ -42,6 +40,12 @@ const RoomDetails = (props: Props) => {
     }
 
     const handleSubmit = async (e) => {
+
+        if (!ctx.loggedIn) {
+            // setShow(true);
+            setResponse("You have to be logged in!")
+            return;
+        }
         e.preventDefault();
         const body = {
             name: `${firstName} ${lastName}`,

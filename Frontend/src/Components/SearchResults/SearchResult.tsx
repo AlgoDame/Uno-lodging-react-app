@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import bg2 from "../../assets/homeBg2.svg"
 import styles from "./SearchResults.module.css"
 import AuthContext from "../../store/AuthContext"
 

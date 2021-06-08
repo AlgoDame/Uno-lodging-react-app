@@ -48,11 +48,12 @@ export const LoggedInProfile = (props: Props) => {
             <DropdownButton className={styles.dropdownBtn} id="dropdown-basic-button" title={<i style={style}><CgProfile /></i>}>
                 <Dropdown.Item className={styles.username}>{props.name}</Dropdown.Item>
                 <Dropdown.Divider />
-                {props.type === "guest" && <><Dropdown.Item onClick={showFavorites}>Favorites</Dropdown.Item>
+                <Dropdown.Item onClick={showFavorites}>Favorites</Dropdown.Item>
+                {props.type === "guest" && <>
                     <Dropdown.Item onClick={() => history.push("/host/listroom")}>Become a Host</Dropdown.Item></>}
                 {props.type === "host" && <>
                     <Dropdown.Item onClick={() => history.push("/host/listroom")}>Add a listing</Dropdown.Item>
-                    <Dropdown.Item onClick={showFavorites}>My Listings</Dropdown.Item>
+                    <Dropdown.Item onClick={() => history.push(`/${props.name}/listings`)}>My Listings</Dropdown.Item>
                     <Dropdown.Item onClick={props.signUp}>Bookings</Dropdown.Item></>}
 
                 <Dropdown.Item style={{ color: "red" }}

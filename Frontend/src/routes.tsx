@@ -16,3 +16,4 @@ export const SearchResults = lazy(() => import('./Components/SearchResults/Searc
 export const RoomsList = lazy(() => import('./Components/RoomsList/RoomsList'))
 export const Favorites = lazy(() => import('./Components/Favorites/Favorites'))
 export const HostForm = lazy(() => import('./Components/HostForm/HostForm'))
+export const Listings = lazy(() => import('./Components/Listings/Listings'))

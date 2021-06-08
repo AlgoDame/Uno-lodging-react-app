@@ -1,23 +1,40 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Carousel, Button } from "react-bootstrap"
-import img1 from '../../assets/homeBg3.svg'
 import styles from './RoomsList.module.css';
 import { FcLike, FcLikePlaceholder } from "react-icons/fc";
-import { RoomData } from '../../store/AuthContext'
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { RoomData } from '../../store/AuthContext';
+import Modal from "../Modal/Modal";
+import { useHistory } from "react-router-dom"
 // import { RoomData } from '../../store/AuthContext'
 interface Props {
     room: RoomData,
     favorites: string[],
     click: (data) => void,
-    favClick: (data) => void
+    favClick: (data) => void,
+    delete?: boolean
+    deleteHandler?: (id) => {}
 
 }
 
 const RoomList = (props: Props) => {
     const [state, setState] = useState(false)
+    const [show, setShow] = useState(false)
     const iconClick = (id) => {
         setState(!state);
         props.favClick(id)
+    }
+    const history = useHistory()
+
+    const deleteRoom = async (id) => {
+        if (props.deleteHandler) {
+            let res = await props.deleteHandler(id);
+            if (res === "Successful") {
+                prompt("room deleted successfully");
+                history.push("/home");
+                window.location.reload()
+            }
+        }
     }
     // const data: RoomData;
     return (
@@ -32,8 +49,19 @@ const RoomList = (props: Props) => {
                 </Carousel.Item>)
                 }
             </Carousel>
+            <Modal title="Warning" toggle={() => setShow(false)} show={show}>
+                <>
+                    <h5 style={{ "marginBottom": "20p" }}>Are you sure you want to delect this listing? Action can't be reversed</h5>
+                    <Button variant="danger" block onClick={() => deleteRoom(props.room.roomId)}>Delete</Button>
+                </>
+            </Modal>
+
             <div className={styles.details}>
-                <h3>{props.room.title}<i onClick={() => iconClick(props.room.roomId)}>{state || props.favorites.includes(props.room.roomId) ? <FcLike /> : <FcLikePlaceholder />}</i></h3>
+                <h3>{props.room.title}
+                    {!props.delete ? <i onClick={() => iconClick(props.room.roomId)}>{state || props.favorites.includes(props.room.roomId) ? <FcLike /> : <FcLikePlaceholder />}</i>
+                        : <i onClick={() => setShow(true)}><RiDeleteBin6Line /> </i>
+                    }
+                </h3>
                 <span>{props.room.location}</span>
                 <h5>{props.room.features}</h5>
                 <div>

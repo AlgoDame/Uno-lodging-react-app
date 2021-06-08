@@ -31,7 +31,7 @@ router.post("/", upload, async (req: Request | any, res) => {
         .get()
         .then((resp) => {
           allRooms = resp.docs.map((room) => ({ ...room.data() }));
-          let ID: number = Date.now();
+          let ID: string = Date.now().toString();
           const body = { ...req.body, imageUrl, roomId: ID, booked: false };
           db.collection("rooms")
             .doc(`${ID}`)

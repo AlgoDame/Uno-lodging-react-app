@@ -89,9 +89,13 @@
     height: 100vh;
     width: 100vw;
     display: flex;
+    flex-flow: column;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
+    background-color: #ccc;
+    position: relative;
+    top: 0;
+    left: 0
 }
 
 .Loader img {
@@ -122,7 +126,11 @@
         opacity: 1;
     }
 
-    50% {
+    5% {}
+
+    10% {}
+
+    20% {
         opacity: 0.5;
         border-color: #5bc28d;
     }
